@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DG System — Agence GoHighLevel Done For You</title>
+<meta name="description" content="DG System construit le système qui trouve, suit et convertit vos clients. Agence GoHighLevel Done For You.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBmaWxsPSJub25lIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZGdHb2xkTWFyayIgeDE9IjAiIHkxPSIwIiB4Mj0iMTAwIiB5Mj0iMTAwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI0YzRDU3QSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNCOTg2MkYiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxwb2x5Z29uIHBvaW50cz0iNTAsNCA5MCwyNyA5MCw3MyA1MCw5NiAxMCw3MyAxMCwyNyIgc3Ryb2tlPSJ1cmwoI2RnR29sZE1hcmspIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjI2IiByPSI1IiBmaWxsPSJ1cmwoI2RnR29sZE1hcmspIi8+CiAgPGNpcmNsZSBjeD0iMjQiIGN5PSI2OCIgcj0iNSIgZmlsbD0idXJsKCNkZ0dvbGRNYXJrKSIvPgogIDxjaXJjbGUgY3g9Ijc2IiBjeT0iNjgiIHI9IjUiIGZpbGw9InVybCgjZGdHb2xkTWFyaykiLz4KICA8cGF0aCBkPSJNNTAgMjYgTDI0IDY4IEw3NiA2OCBaIiBzdHJva2U9InVybCgjZGdHb2xkTWFyaykiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CiAgPHBhdGggZD0iTTUwIDI2IEw1MCA2OCIgc3Ryb2tlPSJ1cmwoI2RnR29sZE1hcmspIiBzdHJva2Utd2lkdGg9IjEuNCIgb3BhY2l0eT0iMC41NSIvPgo8L3N2Zz4K" type="image/svg+xml">
+<style>
+:root{
+  --black:#07070a;
+  --black-soft:#0c0c12;
+  --navy:#0b1830;
+  --navy-soft:#0f2038;
+  --gold:#c9a24b;
+  --gold-light:#f3d57a;
+  --gold-dim:#8a6e2f;
+  --ivory:#f2ede1;
+  --ivory-dim:#a8a396;
+  --line:rgba(201,162,75,0.18);
+  --maxw:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--black);
+  color:var(--ivory);
+  font-family:'Work Sans',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.display{
+  font-family:'Bebas Neue',sans-serif;
+  font-weight:400;
+  letter-spacing:0.03em;
+  line-height:1.05;
+  color:var(--ivory);
+}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+button{font-family:inherit;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;}
+section{position:relative;}
+
+/* cursor */
+.cursor-dot,.cursor-ring{
+  position:fixed;top:0;left:0;pointer-events:none;z-index:9999;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  will-change:transform;
+}
+.cursor-dot{width:6px;height:6px;background:var(--gold-light);transition:opacity .2s;}
+.cursor-ring{width:34px;height:34px;border:1px solid var(--gold);opacity:.7;transition:width .2s,height .2s,opacity .2s,border-color .2s;}
+.cursor-ring.hovering{width:52px;height:52px;border-color:var(--gold-light);opacity:1;}
+@media (pointer:coarse){.cursor-dot,.cursor-ring{display:none;}}
+@media (pointer:fine){body{cursor:none;} a,button{cursor:none;}}
+
+/* header */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:22px 0;
+  background:linear-gradient(to bottom, rgba(7,7,10,0.92), rgba(7,7,10,0));
+  backdrop-filter:blur(6px);
+  transition:padding .3s, background .3s;
+}
+header .wrap{display:flex;align-items:center;justify-content:space-between;}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand img{width:34px;height:34px;}
+.brand span{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.14em;color:var(--ivory);}
+nav.mainnav{display:flex;align-items:center;gap:40px;}
+nav.mainnav a.navlink{font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ivory-dim);transition:color .25s;}
+nav.mainnav a.navlink:hover{color:var(--gold-light);}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px 30px;
+  font-size:12px;letter-spacing:0.12em;text-transform:uppercase;
+  border:1px solid var(--gold);
+  color:var(--black);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  border-radius:2px;
+  transition:transform .25s, box-shadow .25s;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,162,75,0.25);}
+.btn.ghost{
+  background:transparent;color:var(--ivory);border:1px solid var(--line);
+}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold-light);}
+
+/* hero */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:150px 0 100px;
+  background:
+    radial-gradient(ellipse at 75% 20%, rgba(201,162,75,0.10), transparent 55%),
+    radial-gradient(ellipse at 10% 90%, rgba(11,30,56,0.9), transparent 60%),
+    var(--black);
+  overflow:hidden;
+}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 0.95fr;gap:60px;align-items:center;}
+.eyebrow{
+  font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:12px;margin-bottom:26px;
+}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--gold);}
+.hero h1{font-size:clamp(42px,6vw,74px);margin-bottom:26px;}
+.hero h1 em{font-style:normal;color:var(--gold-light);}
+.hero p.lead{font-size:18px;color:var(--ivory-dim);max-width:480px;margin-bottom:38px;}
+.hero .cta-row{display:flex;gap:18px;flex-wrap:wrap;}
+.hero-illustration{filter:drop-shadow(0 0 40px rgba(201,162,75,0.12));}
+
+/* marquee */
+.marquee{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:var(--black-soft);
+  padding:18px 0;overflow:hidden;white-space:nowrap;
+}
+.marquee-track{display:inline-flex;animation:scroll-marquee 32s linear infinite;}
+.marquee-track span{
+  font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.08em;
+  color:var(--ivory-dim);padding:0 28px;display:inline-flex;align-items:center;gap:28px;
+}
+.marquee-track span::after{content:"◆";color:var(--gold);font-size:11px;}
+@keyframes scroll-marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* generic section spacing */
+.section{padding:150px 0;}
+.section-head{max-width:640px;margin:0 auto 90px;text-align:center;}
+.section-head .eyebrow{justify-content:center;}
+.section-head .eyebrow::before{display:none;}
+.section-head h2{font-size:clamp(34px,4.5vw,54px);margin-bottom:20px;}
+.section-head p{color:var(--ivory-dim);font-size:16px;}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s ease;}
+.reveal.in-view{opacity:1;transform:translateY(0);}
+
+/* approach / process */
+.approach{background:var(--navy);}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:50px;}
+.step{padding:36px 30px;border:1px solid var(--line);border-radius:2px;background:rgba(255,255,255,0.02);}
+.step .num{font-family:'Bebas Neue',sans-serif;font-size:46px;color:var(--gold-dim);margin-bottom:18px;}
+.step h3{font-size:24px;margin-bottom:14px;letter-spacing:0.02em;}
+.step p{color:var(--ivory-dim);font-size:15px;}
+
+/* offers */
+.offers-intro{max-width:640px;margin:0 auto 100px;text-align:center;}
+.offer{
+  display:grid;grid-template-columns:0.85fr 1.15fr;gap:70px;align-items:center;
+  padding:60px;
+  border:1px solid var(--line);
+  border-radius:4px;
+  background:linear-gradient(160deg, rgba(201,162,75,0.05), rgba(255,255,255,0.015));
+  margin-bottom:56px;
+}
+.offer:nth-child(even){grid-template-columns:1.15fr 0.85fr;}
+.offer:nth-child(even) .offer-art{order:2;}
+.offer-art{display:flex;align-items:center;justify-content:center;}
+.offer-label{font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.offer h3{font-size:clamp(28px,3.4vw,40px);margin-bottom:22px;}
+.offer p{color:var(--ivory-dim);font-size:15.5px;margin-bottom:16px;}
+.offer p:last-of-type{margin-bottom:0;}
+.offer-price-block{margin-top:34px;padding-top:30px;border-top:1px solid var(--line);}
+.price-row{display:flex;align-items:baseline;gap:16px;margin-bottom:22px;flex-wrap:wrap;}
+.price-old{font-size:20px;color:var(--ivory-dim);text-decoration:line-through;opacity:.6;}
+.price-new{font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--gold-light);letter-spacing:0.02em;}
+.offer-actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap;}
+.stripe-note{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;color:var(--ivory-dim);opacity:.65;letter-spacing:0.03em;
+}
+.stripe-note svg{width:28px;height:auto;opacity:.8;}
+
+/* contact */
+.contact{background:var(--navy-soft);}
+.contact-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:70px;align-items:start;}
+.contact-info h2{font-size:clamp(32px,4vw,48px);margin-bottom:22px;}
+.contact-info p{color:var(--ivory-dim);margin-bottom:28px;max-width:420px;}
+.contact-detail{display:flex;flex-direction:column;gap:14px;margin-top:36px;}
+.contact-detail div{font-size:14px;color:var(--ivory-dim);}
+.contact-detail strong{color:var(--gold-light);display:block;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;}
+form.contact-form{display:flex;flex-direction:column;gap:22px;}
+.field{display:flex;flex-direction:column;gap:8px;}
+.field label{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ivory-dim);}
+.field input,.field textarea{
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--line);
+  border-radius:2px;
+  padding:14px 16px;
+  color:var(--ivory);
+  font-family:'Work Sans',sans-serif;
+  font-size:15px;
+  transition:border-color .25s, background .25s;
+}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,0.05);}
+.field textarea{resize:vertical;min-height:130px;}
+.form-status{font-size:14px;min-height:20px;}
+.form-status.ok{color:var(--gold-light);}
+.form-status.err{color:#e08a8a;}
+
+/* footer */
+footer{padding:70px 0 40px;border-top:1px solid var(--line);background:var(--black);}
+.footer-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:30px;margin-bottom:50px;}
+.footer-nav{display:flex;gap:34px;flex-wrap:wrap;}
+.footer-nav a{font-size:13px;color:var(--ivory-dim);letter-spacing:0.05em;text-transform:uppercase;}
+.footer-nav a:hover{color:var(--gold-light);}
+.footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--ivory-dim);opacity:.7;}
+
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;}
+  .hero-illustration{max-width:340px;margin:0 auto;}
+  nav.mainnav{display:none;}
+  .steps{grid-template-columns:1fr;}
+  .offer,.offer:nth-child(even){grid-template-columns:1fr;padding:34px;}
+  .offer:nth-child(even) .offer-art{order:0;}
+  .contact-grid{grid-template-columns:1fr;}
+  .section{padding:100px 0;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<header>
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBmaWxsPSJub25lIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZGdHb2xkTWFyayIgeDE9IjAiIHkxPSIwIiB4Mj0iMTAwIiB5Mj0iMTAwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI0YzRDU3QSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNCOTg2MkYiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxwb2x5Z29uIHBvaW50cz0iNTAsNCA5MCwyNyA5MCw3MyA1MCw5NiAxMCw3MyAxMCwyNyIgc3Ryb2tlPSJ1cmwoI2RnR29sZE1hcmspIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjI2IiByPSI1IiBmaWxsPSJ1cmwoI2RnR29sZE1hcmspIi8+CiAgPGNpcmNsZSBjeD0iMjQiIGN5PSI2OCIgcj0iNSIgZmlsbD0idXJsKCNkZ0dvbGRNYXJrKSIvPgogIDxjaXJjbGUgY3g9Ijc2IiBjeT0iNjgiIHI9IjUiIGZpbGw9InVybCgjZGdHb2xkTWFyaykiLz4KICA8cGF0aCBkPSJNNTAgMjYgTDI0IDY4IEw3NiA2OCBaIiBzdHJva2U9InVybCgjZGdHb2xkTWFyaykiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CiAgPHBhdGggZD0iTTUwIDI2IEw1MCA2OCIgc3Ryb2tlPSJ1cmwoI2RnR29sZE1hcmspIiBzdHJva2Utd2lkdGg9IjEuNCIgb3BhY2l0eT0iMC41NSIvPgo8L3N2Zz4K" alt="DG System">
+      <span>DG SYSTEM</span>
+    </a>
+    <nav class="mainnav">
+      <a href="#approche" class="navlink">Approche</a>
+      <a href="#offres" class="navlink">Offres</a>
+      <a href="#contact" class="navlink">Contact</a>
+    </nav>
+    <a href="#contact" class="btn">Réserver un appel</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-text">
+        <div class="eyebrow">Agence GoHighLevel · Done For You</div>
+        <h1>Nous construisons le système qui trouve, <em>suit</em> et convertit vos clients.</h1>
+        <p class="lead">Une présence qui inspire confiance, un suivi qui n'oublie jamais un prospect, une acquisition qui tourne sans vous. Nous construisons, vous recevez des rendez-vous.</p>
+        <div class="cta-row">
+          <a href="#contact" class="btn">Réserver un appel</a>
+          <a href="#offres" class="btn ghost">Voir les offres</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg class="hero-illustration" viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="heroGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#f3d57a" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="#f3d57a" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="heroLine" x1="0" y1="0" x2="480" y2="480" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#f3d57a"/>
+              <stop offset="1" stop-color="#8a6e2f"/>
+            </linearGradient>
+          </defs>
+          <circle cx="240" cy="240" r="190" fill="url(#heroGlow)"/>
+          <circle cx="240" cy="240" r="170" stroke="url(#heroLine)" stroke-width="0.6" opacity="0.35"/>
+          <circle cx="240" cy="240" r="120" stroke="url(#heroLine)" stroke-width="0.6" opacity="0.5"/>
+          <g stroke="url(#heroLine)" stroke-width="1.2">
+            <line x1="240" y1="240" x2="240" y2="70"/>
+            <line x1="240" y1="240" x2="380" y2="150"/>
+            <line x1="240" y1="240" x2="400" y2="300"/>
+            <line x1="240" y1="240" x2="300" y2="410"/>
+            <line x1="240" y1="240" x2="150" y2="400"/>
+            <line x1="240" y1="240" x2="70" y2="290"/>
+            <line x1="240" y1="240" x2="90" y2="140"/>
+            <line x1="240" y1="240" x2="170" y2="90"/>
+          </g>
+          <circle cx="240" cy="240" r="14" fill="url(#heroLine)"/>
+          <g fill="#f3d57a">
+            <circle cx="240" cy="70" r="6"/>
+            <circle cx="380" cy="150" r="5"/>
+            <circle cx="400" cy="300" r="5"/>
+            <circle cx="300" cy="410" r="6"/>
+            <circle cx="150" cy="400" r="5"/>
+            <circle cx="70" cy="290" r="5"/>
+            <circle cx="90" cy="140" r="5"/>
+            <circle cx="170" cy="90" r="5"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span><span>Présence en ligne</span><span>Gestion client</span><span>Acquisition</span><span>Automatisation GoHighLevel</span><span>Done for you</span></span>
+      <span><span>Présence en ligne</span><span>Gestion client</span><span>Acquisition</span><span>Automatisation GoHighLevel</span><span>Done for you</span></span>
+    </div>
+  </div>
+
+  <!-- APPROCHE / PROCESS -->
+  <section class="section approach" id="approche">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Notre approche</div>
+        <h2>Nous ne vendons pas un logiciel</h2>
+        <p>Nous construisons le système qui travaille pendant que vous travaillez, calé sur votre métier, pas sur un template générique.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="num">01</div>
+          <h3>Diagnostic</h3>
+          <p>Nous regardons comment vos clients vous trouvent aujourd'hui, où ils se perdent, et ce qui vous fait perdre du temps chaque semaine.</p>
+        </div>
+        <div class="step reveal">
+          <div class="num">02</div>
+          <h3>Construction</h3>
+          <p>Nous construisons le système sur-mesure : présence, suivi ou acquisition, selon ce dont votre activité a besoin en premier.</p>
+        </div>
+        <div class="step reveal">
+          <div class="num">03</div>
+          <h3>Suivi</h3>
+          <p>Le système tourne. Nous restons à vos côtés pour l'ajuster jusqu'à ce qu'il soit parfaitement calé sur votre activité.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFRES -->
+  <section class="section" id="offres">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Nos offres</div>
+        <h2>Trois systèmes, une seule logique</h2>
+        <p>Chaque offre s'appuie sur la précédente. On vous trouve, on ne vous perd plus, on vous en amène de nouveaux.</p>
+      </div>
+
+      <!-- OFFRE 1 -->
+      <article class="offer reveal">
+        <div class="offer-art">
+          <svg viewBox="0 0 300 300" width="260" height="260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="beaconGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#f3d57a" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#f3d57a" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <circle cx="150" cy="140" r="90" fill="url(#beaconGlow)"/>
+            <circle cx="150" cy="140" r="46" stroke="#c9a24b" stroke-width="1" opacity="0.4"/>
+            <circle cx="150" cy="140" r="70" stroke="#c9a24b" stroke-width="0.6" opacity="0.25"/>
+            <circle cx="150" cy="140" r="10" fill="#f3d57a"/>
+            <g fill="#8a6e2f" opacity="0.55">
+              <circle cx="50" cy="230" r="2.5"/>
+              <circle cx="90" cy="255" r="2"/>
+              <circle cx="230" cy="70" r="2.5"/>
+              <circle cx="255" cy="120" r="2"/>
+              <circle cx="220" cy="230" r="2.5"/>
+              <circle cx="60" cy="90" r="2"/>
+              <circle cx="30" cy="150" r="2"/>
+            </g>
+          </svg>
+        </div>
+        <div class="offer-body">
+          <div class="offer-label">Offre 01 — Présence en ligne</div>
+          <h3>On vous trouve</h3>
+          <p>Un prospect vous trouve sur LinkedIn. Il clique sur votre profil, et tombe sur une photo datée, un titre générique, rien qui prouve que vous êtes toujours actif. Il ne le dit jamais à voix haute. Il vient simplement de décider de ne pas vous contacter.</p>
+          <p>Nous reconstruisons ce que les gens voient de vous avant même de vous parler. Une image qui inspire confiance en trois secondes. Un endroit où ils peuvent en apprendre plus sur vous, et repartir avec un rendez-vous déjà pris, sans un seul échange de messages, sans attendre votre réponse.</p>
+          <p>Rien n'est calqué sur un modèle générique. Ce que nous construisons dépend de votre métier, de qui sont vos clients, et de la manière dont vous vendez aujourd'hui.</p>
+          <p>Le genre de détails que personne ne remarque consciemment. Sauf quand ils manquent.</p>
+          <div class="offer-price-block">
+            <div class="price-row">
+              <span class="price-old">997€</span>
+              <span class="price-new">497€</span>
+            </div>
+            <div class="offer-actions">
+              <a href="#contact" class="btn">Réserver un appel</a>
+              <span class="stripe-note">
+                <svg viewBox="0 0 60 25" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="60" height="25" rx="4" fill="none" stroke="#a8a396" stroke-width="1"/><text x="30" y="16" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="9" fill="#a8a396">stripe</text></svg>
+                Paiement sécurisé
+              </span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- OFFRE 2 -->
+      <article class="offer reveal">
+        <div class="offer-art">
+          <svg viewBox="0 0 300 300" width="260" height="260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="threadLine" x1="0" y1="0" x2="300" y2="300" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#f3d57a"/>
+                <stop offset="1" stop-color="#8a6e2f"/>
+              </linearGradient>
+            </defs>
+            <path d="M40 220 C 80 90, 140 260, 180 130 S 260 60, 260 160" stroke="url(#threadLine)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <circle cx="40" cy="220" r="7" fill="#f3d57a"/>
+            <circle cx="180" cy="130" r="7" fill="#f3d57a"/>
+            <circle cx="260" cy="160" r="7" fill="#f3d57a"/>
+            <circle cx="110" cy="175" r="4" fill="#c9a24b" opacity="0.7"/>
+            <circle cx="222" cy="95" r="4" fill="#c9a24b" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="offer-body">
+          <div class="offer-label">Offre 02 — Gestion client</div>
+          <h3>On ne vous perd plus</h3>
+          <p>Un vendredi, un prospect chaud vous contacte. Le lundi, il est enterré sous quinze autres messages dans une boîte que vous n'avez pas ouverte du week-end. Il ne relance pas. Il a déjà pris rendez-vous ailleurs.</p>
+          <p>Ce que nous mettons en place, c'est une mémoire qui ne vous oublie jamais, elle. Chaque personne qui s'intéresse à vous reste suivie, jusqu'à ce qu'elle dise clairement oui ou non, et vous n'intervenez que quand c'est vraiment vous qui pouvez faire basculer la décision.</p>
+          <p>Le rythme des relances, le ton des messages, ce qui compte comme « chaud » ou « tiède » chez vous : tout est calé sur votre secteur, pas sur un modèle standard.</p>
+          <p>Ce vendredi-là, il aurait suffi de 30 secondes pour ne pas le perdre. Maintenant, personne n'a plus besoin d'y penser.</p>
+          <div class="offer-price-block">
+            <div class="price-row">
+              <span class="price-old">2997€</span>
+              <span class="price-new">2000€</span>
+            </div>
+            <div class="offer-actions">
+              <a href="#contact" class="btn">Réserver un appel</a>
+              <span class="stripe-note">
+                <svg viewBox="0 0 60 25" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="60" height="25" rx="4" fill="none" stroke="#a8a396" stroke-width="1"/><text x="30" y="16" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="9" fill="#a8a396">stripe</text></svg>
+                Paiement sécurisé
+              </span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- OFFRE 3 -->
+      <article class="offer reveal">
+        <div class="offer-art">
+          <svg viewBox="0 0 300 300" width="260" height="260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="150" cy="150" r="70" stroke="#8a6e2f" stroke-width="0.7" stroke-dasharray="3 5" opacity="0.5"/>
+            <g stroke="#c9a24b" stroke-width="1">
+              <line x1="150" y1="150" x2="150" y2="150"/>
+              <line x1="150" y1="150" x2="60" y2="60"/>
+              <line x1="150" y1="150" x2="30" y2="150"/>
+              <line x1="150" y1="150" x2="70" y2="250"/>
+              <line x1="150" y1="150" x2="240" y2="270"/>
+              <line x1="150" y1="150" x2="270" y2="190"/>
+              <line x1="150" y1="150" x2="260" y2="70"/>
+            </g>
+            <circle cx="150" cy="150" r="12" fill="#f3d57a"/>
+            <g fill="#f3d57a">
+              <circle cx="60" cy="60" r="4"/>
+              <circle cx="30" cy="150" r="4"/>
+              <circle cx="70" cy="250" r="4"/>
+              <circle cx="240" cy="270" r="4"/>
+              <circle cx="270" cy="190" r="4"/>
+              <circle cx="260" cy="70" r="4"/>
+            </g>
+          </svg>
+        </div>
+        <div class="offer-body">
+          <div class="offer-label">Offre 03 — Acquisition</div>
+          <h3>On vous en amène de nouveaux</h3>
+          <p>Aujourd'hui, chaque nouveau client vient d'une recommandation, ou d'un contact que vous avez personnellement relancé. Ça fonctionne, jusqu'au mois où votre réseau ne suffit plus à remplir l'agenda.</p>
+          <p>Nous construisons ce que votre carnet d'adresses ne peut pas faire seul : des personnes qui n'ont jamais entendu parler de vous commencent à arriver, chaque semaine, sans que vous ayez à les chercher une par une.</p>
+          <p>La stratégie n'est pas la même pour un cabinet qui vise 100k€ par an que pour un indépendant qui démarre. Nous la construisons à partir de votre modèle économique, pas d'un template d'agence.</p>
+          <p>Ce n'est pas une dépense. C'est un système qui se rembourse sur les deux ou trois prochaines années, et continue de tourner après.</p>
+          <div class="offer-price-block">
+            <div class="price-row">
+              <span class="price-new">7000€</span>
+            </div>
+            <div class="offer-actions">
+              <a href="#contact" class="btn">Réserver un appel</a>
+              <span class="stripe-note">
+                <svg viewBox="0 0 60 25" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="60" height="25" rx="4" fill="none" stroke="#a8a396" stroke-width="1"/><text x="30" y="16" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="9" fill="#a8a396">stripe</text></svg>
+                Paiement sécurisé
+              </span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact" id="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <div class="eyebrow">Contact</div>
+          <h2>Parlons de votre système</h2>
+          <p>Décrivez-nous votre activité et ce qui vous freine aujourd'hui. Nous revenons vers vous sous 24 à 48 heures pour caler un appel.</p>
+          <div class="contact-detail">
+            <div><strong>Email</strong>contact@dgsystem.fr</div>
+            <div><strong>Réponse</strong>Sous 24 à 48 heures ouvrées</div>
+          </div>
+        </div>
+        <form class="contact-form reveal" id="contactForm">
+          <div class="field">
+            <label for="name">Nom</label>
+            <input type="text" id="name" name="name" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required minlength="10" placeholder="Parlez-nous de votre activité et de ce que vous cherchez à résoudre."></textarea>
+          </div>
+          <button type="submit" class="btn" id="contactSubmit">Envoyer le message</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <a href="#top" class="brand">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBmaWxsPSJub25lIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZGdHb2xkTWFyayIgeDE9IjAiIHkxPSIwIiB4Mj0iMTAwIiB5Mj0iMTAwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI0YzRDU3QSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNCOTg2MkYiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxwb2x5Z29uIHBvaW50cz0iNTAsNCA5MCwyNyA5MCw3MyA1MCw5NiAxMCw3MyAxMCwyNyIgc3Ryb2tlPSJ1cmwoI2RnR29sZE1hcmspIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjI2IiByPSI1IiBmaWxsPSJ1cmwoI2RnR29sZE1hcmspIi8+CiAgPGNpcmNsZSBjeD0iMjQiIGN5PSI2OCIgcj0iNSIgZmlsbD0idXJsKCNkZ0dvbGRNYXJrKSIvPgogIDxjaXJjbGUgY3g9Ijc2IiBjeT0iNjgiIHI9IjUiIGZpbGw9InVybCgjZGdHb2xkTWFyaykiLz4KICA8cGF0aCBkPSJNNTAgMjYgTDI0IDY4IEw3NiA2OCBaIiBzdHJva2U9InVybCgjZGdHb2xkTWFyaykiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CiAgPHBhdGggZD0iTTUwIDI2IEw1MCA2OCIgc3Ryb2tlPSJ1cmwoI2RnR29sZE1hcmspIiBzdHJva2Utd2lkdGg9IjEuNCIgb3BhY2l0eT0iMC41NSIvPgo8L3N2Zz4K" alt="DG System">
+        <span>DG SYSTEM</span>
+      </a>
+      <nav class="footer-nav">
+        <a href="#approche">Approche</a>
+        <a href="#offres">Offres</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 DG System. Tous droits réservés.</span>
+      <span>Agence GoHighLevel Done For You</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// custom cursor
+(function(){
+  var dot = document.getElementById('cursorDot');
+  var ring = document.getElementById('cursorRing');
+  if(!dot || !ring || window.matchMedia('(pointer: coarse)').matches) return;
+  var rx=0, ry=0, x=0, y=0;
+  window.addEventListener('mousemove', function(e){
+    x = e.clientX; y = e.clientY;
+    dot.style.transform = 'translate('+x+'px,'+y+'px) translate(-50%,-50%)';
+  });
+  function loop(){
+    rx += (x-rx)*0.18; ry += (y-ry)*0.18;
+    ring.style.transform = 'translate('+rx+'px,'+ry+'px) translate(-50%,-50%)';
+    requestAnimationFrame(loop);
+  }
+  loop();
+  document.querySelectorAll('a, button, input, textarea').forEach(function(el){
+    el.addEventListener('mouseenter', function(){ ring.classList.add('hovering'); });
+    el.addEventListener('mouseleave', function(){ ring.classList.remove('hovering'); });
+  });
+})();
+
+// scroll reveal
+(function(){
+  var items = document.querySelectorAll('.reveal');
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15});
+  items.forEach(function(el){ obs.observe(el); });
+})();
+
+// contact form
+(function(){
+  var form = document.getElementById('contactForm');
+  var status = document.getElementById('formStatus');
+  var submitBtn = document.getElementById('contactSubmit');
+  if(!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    status.textContent = '';
+    status.className = 'form-status';
+    var data = new FormData(form);
+    submitBtn.disabled = true;
+    var originalLabel = submitBtn.textContent;
+    submitBtn.textContent = 'Envoi en cours…';
+    fetch('https://formsubmit.co/ajax/contact@dgsystem.fr', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: data
+    }).then(function(res){
+      if(!res.ok) throw new Error('network');
+      status.textContent = 'Message envoyé. Nous revenons vers vous sous 24 à 48 heures.';
+      status.className = 'form-status ok';
+      form.reset();
+    }).catch(function(){
+      status.textContent = "L'envoi a échoué. Réessayez ou écrivez-nous directement à contact@dgsystem.fr.";
+      status.className = 'form-status err';
+    }).finally(function(){
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
