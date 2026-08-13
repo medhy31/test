@@ -159,11 +159,15 @@
     .dg-section__inner--xl{padding:100px 20px;}
   }
   .dg-grid{display:grid;gap:24px;margin-top:52px;}
+  .dg-grid--3{grid-template-columns:repeat(1,1fr);}
   .dg-grid--4{grid-template-columns:repeat(1,1fr);}
   .dg-grid--5{grid-template-columns:repeat(1,1fr);}
   @media(min-width:640px){
     .dg-grid--4{grid-template-columns:repeat(2,1fr);}
     .dg-grid--5{grid-template-columns:repeat(2,1fr);}
+  }
+  @media(min-width:768px){
+    .dg-grid--3{grid-template-columns:repeat(3,1fr);}
   }
   @media(min-width:1024px){
     .dg-grid--4{grid-template-columns:repeat(4,1fr);}
@@ -291,6 +295,21 @@
     font-size:12px;
     letter-spacing:.06em;
     color:var(--dg-white-faint);
+  }
+  .dg-hero__badge{
+    display:inline-flex;
+    max-width:420px;
+    margin-top:4px;
+    padding:8px 16px;
+    border:1px solid rgba(184,150,46,0.3);
+    border-radius:999px;
+    background:rgba(184,150,46,0.05);
+    font-family:var(--dg-font-mono);
+    font-size:11px;
+    line-height:1.5;
+    letter-spacing:.02em;
+    color:var(--dg-white-faint);
+    text-align:center;
   }
   .dg-hero__illustration{
     position:absolute;
@@ -437,7 +456,8 @@
     align-items:baseline;
     gap:12px;
     font-family:var(--dg-font-mono);
-    margin-bottom:24px;
+    margin-top:28px;
+    margin-bottom:6px;
   }
   .dg-offer-row__price-old{
     font-size:17px;
@@ -449,13 +469,52 @@
     font-size:30px;
     color:var(--dg-gold-2);
   }
+  .dg-offer-row__price-caption{
+    font-family:var(--dg-font-mono);
+    font-size:12px;
+    letter-spacing:.02em;
+    color:var(--dg-white-faint);
+  }
   .dg-offer-row__body p{
     font-size:15px;
     margin-bottom:14px;
     max-width:560px;
   }
   .dg-offer-row__body p:last-of-type{margin-bottom:0;}
+  .dg-offer-row__deliverables{
+    margin-top:28px;
+    padding-top:24px;
+    border-top:1px solid rgba(245,242,236,0.12);
+    max-width:560px;
+  }
+  .dg-offer-row__deliverables-title{
+    font-family:var(--dg-font-mono);
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--dg-gold-1);
+    margin-bottom:14px;
+  }
+  .dg-offer-row__deliverables li{
+    font-size:14px;
+    color:var(--dg-white-dim);
+    padding-left:18px;
+    position:relative;
+    margin-bottom:10px;
+  }
+  .dg-offer-row__deliverables li:last-child{margin-bottom:0;}
+  .dg-offer-row__deliverables li::before{
+    content:"";
+    position:absolute;
+    left:0;top:7px;
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--dg-gold-1);
+  }
   .dg-offer-row .dg-btn{margin-top:28px;}
+
+  /* Transparence abonnement GHL */
+  .dg-transparency{background:var(--dg-black-1);}
 
   /* Process / timeline */
   .dg-process{background:var(--dg-black-1);}
@@ -624,6 +683,36 @@
     color:var(--dg-white-faint);
     text-align:center;
     max-width:220px;
+  }
+
+  /* FAQ */
+  .dg-faq{background:var(--dg-black-2);}
+  .dg-faq__list{margin-top:48px;display:flex;flex-direction:column;}
+  .dg-faq__item{border-top:1px solid rgba(245,242,236,0.12);}
+  .dg-faq__item:last-child{border-bottom:1px solid rgba(245,242,236,0.12);}
+  .dg-faq__item summary{
+    list-style:none;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    padding:24px 4px;
+    font-family:var(--dg-font-body);
+    font-weight:700;
+    font-size:16px;
+    color:var(--dg-white);
+    transition:color .2s ease;
+  }
+  .dg-faq__item summary::-webkit-details-marker{display:none;}
+  .dg-faq__item summary:hover{color:var(--dg-gold-2);}
+  .dg-faq__chevron{flex:0 0 auto;color:var(--dg-gold-2);transition:transform .25s ease;}
+  .dg-faq__item[open] .dg-faq__chevron{transform:rotate(180deg);}
+  .dg-faq__answer{
+    padding:0 4px 24px;
+    font-size:14.5px;
+    color:var(--dg-white-dim);
+    max-width:680px;
   }
 
   /* CTA final + formulaire intégré */
@@ -814,6 +903,7 @@
       <div class="dg-hero__actions reveal">
         <a href="#diagnostic" class="dg-btn dg-btn--primary">Réserver mon diagnostic gratuit</a>
         <span class="dg-hero__reassurance">Sans engagement · 30 minutes · 100% gratuit</span>
+        <span class="dg-hero__badge">Configuration clé en main sur votre propre compte GoHighLevel : vous ne touchez à aucun paramètre technique.</span>
       </div>
     </div>
   </section>
@@ -980,16 +1070,26 @@
           <div class="dg-offer-row__content">
             <p class="dg-offer-row__eyebrow">Offre 01</p>
             <h3 class="dg-offer-row__title">Présence en ligne</h3>
-            <p class="dg-offer-row__price">
-              <span class="dg-offer-row__price-old">997€</span>
-              <span class="dg-offer-row__price-new">497€</span>
-            </p>
             <div class="dg-offer-row__body">
               <p>Un prospect vous trouve sur LinkedIn. Il clique sur votre profil et tombe sur une photo datée, un titre générique, rien qui prouve que vous êtes toujours actif. Il ne le dit jamais à voix haute. Il vient simplement de décider de ne pas vous contacter.</p>
               <p>Nous reconstruisons ce que les gens voient de vous avant même de vous parler. Une image qui inspire confiance en trois secondes. Un endroit où ils peuvent en apprendre plus sur vous, et repartir avec un rendez-vous déjà pris, sans un seul échange de messages, sans attendre votre réponse.</p>
               <p>Rien n'est calqué sur un modèle générique. Ce que nous construisons dépend de votre métier, de qui sont vos clients, et de la manière dont vous vendez aujourd'hui.</p>
               <p>Le genre de détails que personne ne remarque consciemment. Sauf quand ils manquent.</p>
             </div>
+            <div class="dg-offer-row__deliverables">
+              <p class="dg-offer-row__deliverables-title">Ce qui est concrètement installé sur votre GoHighLevel</p>
+              <ul>
+                <li>Landing page ou site vitrine sur-mesure</li>
+                <li>Calendrier de prise de rendez-vous connecté à votre Google ou Outlook</li>
+                <li>Domaine personnalisé et processeur de paiement configurés</li>
+                <li>Formulaire de qualification des prospects, adapté à votre activité</li>
+              </ul>
+            </div>
+            <p class="dg-offer-row__price">
+              <span class="dg-offer-row__price-old">997€</span>
+              <span class="dg-offer-row__price-new">497€</span>
+            </p>
+            <p class="dg-offer-row__price-caption">Configuration clé en main, réglée une seule fois.</p>
             <a href="#diagnostic" class="dg-btn dg-btn--ghost">En discuter</a>
           </div>
         </article>
@@ -1005,16 +1105,26 @@
           <div class="dg-offer-row__content">
             <p class="dg-offer-row__eyebrow">Offre 02</p>
             <h3 class="dg-offer-row__title">Gestion Client</h3>
-            <p class="dg-offer-row__price">
-              <span class="dg-offer-row__price-old">2997€</span>
-              <span class="dg-offer-row__price-new">2000€</span>
-            </p>
             <div class="dg-offer-row__body">
               <p>Un vendredi, un prospect chaud vous contacte. Le lundi, il est enterré sous quinze autres messages dans une boîte que vous n'avez pas ouverte du week-end. Il ne relance pas. Il a déjà pris rendez-vous ailleurs.</p>
               <p>Ce que nous mettons en place, c'est une mémoire qui ne vous oublie jamais, elle. Chaque personne qui s'intéresse à vous reste suivie, jusqu'à ce qu'elle dise clairement oui ou non, et vous n'intervenez que quand c'est vraiment vous qui pouvez faire basculer la décision.</p>
               <p>Le rythme des relances, le ton des messages, ce qui compte comme chaud ou tiède chez vous : tout est calé sur votre secteur, pas sur un modèle standard.</p>
               <p>Ce vendredi-là, il aurait suffi de 30 secondes pour ne pas le perdre. Maintenant, personne n'a plus besoin d'y penser.</p>
             </div>
+            <div class="dg-offer-row__deliverables">
+              <p class="dg-offer-row__deliverables-title">Ce qui est concrètement installé sur votre GoHighLevel</p>
+              <ul>
+                <li>CRM complet et pipelines de vente structurés</li>
+                <li>Workflows d'automatisation des relances (SMS et email)</li>
+                <li>Boîte de réception unifiée : SMS, email, WhatsApp, Instagram DM réunis au même endroit</li>
+                <li>Notification automatique sur votre téléphone dès qu'un prospect devient chaud</li>
+              </ul>
+            </div>
+            <p class="dg-offer-row__price">
+              <span class="dg-offer-row__price-old">2997€</span>
+              <span class="dg-offer-row__price-new">2000€</span>
+            </p>
+            <p class="dg-offer-row__price-caption">Places limitées. Configuration clé en main, réglée une seule fois.</p>
             <a href="#diagnostic" class="dg-btn dg-btn--primary">En discuter</a>
           </div>
         </article>
@@ -1043,19 +1153,61 @@
           <div class="dg-offer-row__content">
             <p class="dg-offer-row__eyebrow">Offre 03</p>
             <h3 class="dg-offer-row__title">Acquisition</h3>
-            <p class="dg-offer-row__price">
-              <span class="dg-offer-row__price-new">7000€</span>
-            </p>
             <div class="dg-offer-row__body">
               <p>Aujourd'hui, chaque nouveau client vient d'une recommandation, ou d'un contact que vous avez personnellement relancé. Ça fonctionne, jusqu'au mois où votre réseau ne suffit plus à remplir l'agenda.</p>
               <p>Nous construisons ce que votre carnet d'adresses ne peut pas faire seul : des personnes qui n'ont jamais entendu parler de vous commencent à arriver, chaque semaine, sans que vous ayez à les chercher une par une.</p>
               <p>La stratégie n'est pas la même pour un cabinet qui vise 100k€ par an que pour un indépendant qui démarre. Nous la construisons à partir de votre modèle économique, pas d'un template d'agence.</p>
               <p>Ce n'est pas une dépense. C'est un système qui se rembourse sur les deux ou trois prochaines années, et continue de tourner après.</p>
             </div>
+            <div class="dg-offer-row__deliverables">
+              <p class="dg-offer-row__deliverables-title">Ce qui est concrètement installé sur votre GoHighLevel</p>
+              <ul>
+                <li>Tunnels de vente multi-étapes, avec upsells et cross-sells</li>
+                <li>Espace membre ou portail de formation, pour capturer des leads qualifiés ou délivrer vos produits</li>
+                <li>Workflows d'acquisition avancés : nurturing long terme, relance des paniers abandonnés, réactivation de vos bases dormantes</li>
+                <li>Tableaux de bord et reporting analytique du ROI de vos campagnes</li>
+              </ul>
+            </div>
+            <p class="dg-offer-row__price">
+              <span class="dg-offer-row__price-new">7000€ minimum</span>
+            </p>
+            <p class="dg-offer-row__price-caption">Configuration clé en main, réglée une seule fois.</p>
             <a href="#diagnostic" class="dg-btn dg-btn--ghost">En discuter</a>
           </div>
         </article>
 
+      </div>
+    </div>
+  </section>
+
+  <div class="dg-divider" aria-hidden="true"><span></span></div>
+
+  <section class="dg-transparency" id="transparence">
+    <div class="dg-section__inner">
+      <p class="dg-eyebrow reveal">Transparence</p>
+      <h2 class="dg-h2 reveal">POURQUOI VOTRE ABONNEMENT GOHIGHLEVEL RESTE À VOTRE CHARGE</h2>
+      <div class="dg-grid dg-grid--3">
+        <article class="dg-card reveal">
+          <span class="dg-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 28 28" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 14l10-9 10 9"/><path d="M7 12v10h14V12"/><path d="M12 22v-6h4v6"/></svg>
+          </span>
+          <h3>Vous restez propriétaire, pas locataire</h3>
+          <p>Nous construisons votre système sur votre compte, pas sur le nôtre. Vous êtes propriétaire de vos données, de vos contacts et de vos automatisations. Aucune agence ne peut vous les reprendre.</p>
+        </article>
+        <article class="dg-card reveal">
+          <span class="dg-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 28 28" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="6" cy="6" r="2"/><circle cx="6" cy="14" r="2"/><circle cx="6" cy="22" r="2"/><path d="M8 6h4M8 14h4M8 22h4"/><circle cx="18" cy="14" r="4"/></svg>
+          </span>
+          <h3>Un outil qui en remplace plusieurs</h3>
+          <p>GoHighLevel réunit ce que font aujourd'hui séparément des outils comme Calendly, ActiveCampaign, ClickFunnels ou Teachable. Votre abonnement GoHighLevel remplace ces abonnements dispersés par un seul, sous votre contrôle.</p>
+        </article>
+        <article class="dg-card reveal">
+          <span class="dg-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 28 28" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M14 3l9 4v6c0 6-4 10-9 12-5-2-9-6-9-12V7z"/><path d="M11 14l2 2 4-5"/></svg>
+          </span>
+          <h3>Vos paiements et vos données, à votre nom</h3>
+          <p>Votre passerelle de paiement et les données de vos prospects sont légalement rattachées à votre compte, pas au nôtre. C'est ce qui vous protège en cas de litige, et ce qui vous permet de partir avec tout, à tout moment.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -1135,6 +1287,43 @@
       <div class="dg-diff__visual reveal" aria-hidden="true">
         <div class="dg-diff__rings"><span></span><span></span><span></span></div>
         <span class="dg-diff__badge">100%<small>propriétaire</small></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="dg-faq" id="faq">
+    <div class="dg-section__inner">
+      <p class="dg-eyebrow reveal">Questions fréquentes</p>
+      <h2 class="dg-h2 reveal">CE QU'ON NOUS DEMANDE LE PLUS SOUVENT</h2>
+      <div class="dg-faq__list">
+        <details class="dg-faq__item reveal">
+          <summary>
+            <span>Combien de temps prend l'installation ?</span>
+            <svg class="dg-faq__chevron" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg>
+          </summary>
+          <p class="dg-faq__answer">Entre 5 jours ouvrés pour Présence en ligne et 15 jours ouvrés pour Acquisition, selon la complexité de l'offre choisie, une fois tous les éléments reçus de votre part.</p>
+        </details>
+        <details class="dg-faq__item reveal">
+          <summary>
+            <span>Dois-je avoir des compétences techniques ?</span>
+            <svg class="dg-faq__chevron" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg>
+          </summary>
+          <p class="dg-faq__answer">Non. Nous configurons l'intégralité de votre système sur votre compte GoHighLevel. Vous n'ouvrez aucun paramètre technique vous-même.</p>
+        </details>
+        <details class="dg-faq__item reveal">
+          <summary>
+            <span>Que se passe-t-il si je veux modifier un texte plus tard ?</span>
+            <svg class="dg-faq__chevron" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg>
+          </summary>
+          <p class="dg-faq__answer">Deux tours de révisions sont inclus après la livraison. Au-delà, contactez-nous : nous trouvons ensemble la solution la plus adaptée à votre demande.</p>
+        </details>
+        <details class="dg-faq__item reveal">
+          <summary>
+            <span>Pourquoi pas une agence classique ?</span>
+            <svg class="dg-faq__chevron" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg>
+          </summary>
+          <p class="dg-faq__answer">Une agence classique travaille souvent sur son propre compte, en mode agence : vous dépendez d'elle pour tout accès. Nous travaillons directement sur votre compte, en accès collaborateur. Vous restez propriétaire à 100%, avec ou sans nous.</p>
+        </details>
       </div>
     </div>
   </section>
@@ -1299,7 +1488,7 @@
     });
     root.addEventListener('mousemove', onMove);
 
-    var hoverTargets = root.querySelectorAll('a, button, .dg-card, .dg-offer-row, .dg-benefit, .dg-timeline__item, .dg-quiz__option');
+    var hoverTargets = root.querySelectorAll('a, button, .dg-card, .dg-offer-row, .dg-benefit, .dg-timeline__item, .dg-quiz__option, .dg-faq__item summary');
     hoverTargets.forEach(function(el){
       el.addEventListener('mouseenter', function(){ ring.classList.add('dg-cursor-ring--active'); });
       el.addEventListener('mouseleave', function(){ ring.classList.remove('dg-cursor-ring--active'); });
