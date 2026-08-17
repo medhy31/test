@@ -1,0 +1,269 @@
+<!--
+  DG System — Effet "verre doré" sur cartes d'offres + CTA
+  ==========================================================
+  Bloc autonome, à coller UNE FOIS dans un élément "Custom Code / HTML"
+  de la page GoHighLevel (voir instructions de placement en bas de fichier,
+  après le </script>). Aucune dépendance externe, aucun WebGL : glassmorphism
+  CSS natif (backdrop-filter), accéléré GPU par le navigateur, avec un léger
+  reflet qui suit le doigt/la souris. Fonctionne sans JS si le script ne
+  charge pas — seule l'interaction fine disparaît, le verre reste visible.
+
+  RÉGLAGES RAPIDES — tout est dans les variables CSS ci-dessous.
+-->
+<style>
+  :root {
+    --dg-gold: #B8964F;
+    --dg-navy: #0B1F3A;
+    --dg-navy-deep: #071527;
+    --dg-radius: 18px;
+    --dg-blur: 20px;          /* réduit automatiquement sur mobile plus bas */
+    --dg-border-op: 0.35;     /* opacité du liseré gold */
+    --dg-tint-op: 0.14;       /* opacité du voile gold dans le fond */
+  }
+
+  /* ---------------------------------------------------------------------
+     Panneau de base — utilisé sur TOUTES les cartes/CTA concernés.
+     Ajoute la classe "dg-glass" à l'élément (voir instructions en bas),
+     puis un modificateur d'intensité : dg-glass--1 / --2 / --3 / --cta.
+     --------------------------------------------------------------------- */
+  .dg-glass {
+    position: relative;
+    isolation: isolate; /* le reflet ne doit pas déborder sur les voisins */
+    border-radius: var(--dg-radius);
+    background:
+      linear-gradient(155deg,
+        rgba(184, 150, 79, var(--dg-tint-op)) 0%,
+        rgba(11, 31, 58, 0.55) 55%,
+        rgba(7, 21, 39, 0.72) 100%);
+    border: 1px solid rgba(184, 150, 79, var(--dg-border-op));
+    box-shadow:
+      0 10px 34px rgba(0, 0, 0, 0.38),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .dg-glass {
+      backdrop-filter: blur(var(--dg-blur)) saturate(135%);
+      -webkit-backdrop-filter: blur(var(--dg-blur)) saturate(135%);
+    }
+  }
+
+  /* Reflet qui suit le pointeur (desktop) — piloté par --mx/--my en JS.
+     Un simple radial-gradient positionné : coût de rendu négligeable. */
+  .dg-glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      220px circle at var(--mx, 50%) var(--my, 20%),
+      rgba(255, 240, 210, 0.16),
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .dg-glass:hover::before { opacity: 1; }
+  }
+
+  /* Tier 1 — Présence en ligne : sobre, à peine perceptible. */
+  .dg-glass--1 { --dg-blur: 14px; --dg-tint-op: 0.08; --dg-border-op: 0.25; }
+
+  /* Tier 2 — Gestion Client : un cran au-dessus. */
+  .dg-glass--2 { --dg-blur: 18px; --dg-tint-op: 0.12; --dg-border-op: 0.32; }
+
+  /* Tier 3 — Acquisition : traitement premium, seul niveau avec le
+     liseré animé (voir .dg-glass--3::after). */
+  .dg-glass--3 {
+    --dg-blur: 24px;
+    --dg-tint-op: 0.18;
+    --dg-border-op: 0.5;
+    box-shadow:
+      0 14px 44px rgba(0, 0, 0, 0.45),
+      0 0 0 1px rgba(184, 150, 79, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+  /* Liseré doré qui tourne lentement — un seul pseudo-élément transformé
+     (translate/rotate), composité par le GPU, coût quasi nul même sur
+     mobile d'entrée de gamme. Coupé si l'utilisateur préfère moins de
+     mouvement, et mis en pause hors écran via IntersectionObserver (JS). */
+  .dg-glass--3::after {
+    content: "";
+    position: absolute;
+    inset: -60%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      rgba(184, 150, 79, 0.55) 25deg,
+      transparent 70deg,
+      transparent 360deg
+    );
+    animation: dg-spin 7s linear infinite;
+    animation-play-state: paused; /* démarré par JS quand la carte est visible */
+    pointer-events: none;
+  }
+  @keyframes dg-spin { to { transform: rotate(360deg); } }
+
+  /* CTA final — même famille visuelle que le tier 3, en plus compact. */
+  .dg-glass--cta {
+    --dg-blur: 16px;
+    --dg-tint-op: 0.16;
+    --dg-border-op: 0.55;
+    display: inline-block;
+  }
+  .dg-glass--cta:hover,
+  .dg-glass--cta:focus-visible {
+    border-color: var(--dg-gold);
+    transform: translateY(-1px);
+    box-shadow: 0 12px 30px rgba(184, 150, 79, 0.25);
+  }
+
+  /* Sweep tactile — un seul passage de lumière déclenché au tap, puisque
+     le mobile n'a pas de hover. Classe posée par le JS, retirée après
+     l'animation (voir script). */
+  .dg-glass.is-tapped::before {
+    opacity: 1;
+    background: linear-gradient(
+      100deg,
+      transparent 30%,
+      rgba(255, 240, 210, 0.22) 50%,
+      transparent 70%
+    );
+    background-size: 250% 250%;
+    animation: dg-sweep 0.7s ease-out;
+  }
+  @keyframes dg-sweep {
+    from { background-position: 120% 0; }
+    to   { background-position: -20% 0; }
+  }
+
+  /* Repli propre si backdrop-filter n'est pas supporté (vieux Android) :
+     panneau plein, toujours dans la palette, jamais un blanc par défaut. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .dg-glass {
+      background: linear-gradient(155deg, #10233d 0%, var(--dg-navy-deep) 100%);
+    }
+  }
+
+  /* Mobile : blur réduit partout (coût GPU proportionnel au rayon) et
+     liseré tournant du tier 3 ralenti pour rester discret sur petit écran. */
+  @media (max-width: 640px) {
+    .dg-glass--1 { --dg-blur: 10px; }
+    .dg-glass--2 { --dg-blur: 12px; }
+    .dg-glass--3 { --dg-blur: 16px; }
+    .dg-glass--3::after { animation-duration: 10s; }
+  }
+
+  /* Accessibilité : on coupe tout mouvement, on garde le verre. */
+  @media (prefers-reduced-motion: reduce) {
+    .dg-glass--3::after { animation: none; }
+    .dg-glass.is-tapped::before { animation: none; opacity: 0.6; }
+    .dg-glass { transition: none; }
+  }
+</style>
+
+<script>
+(function () {
+  "use strict";
+
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var cards = document.querySelectorAll(".dg-glass");
+  if (!cards.length) return;
+
+  /* Reflet qui suit la souris — throttlé par requestAnimationFrame pour
+     ne jamais dépasser un update par frame, même si le navigateur envoie
+     des pointermove en rafale. */
+  var pending = false;
+  function trackPointer(e, card) {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(function () {
+      var rect = card.getBoundingClientRect();
+      var x = ((e.clientX - rect.left) / rect.width) * 100;
+      var y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty("--mx", x + "%");
+      card.style.setProperty("--my", y + "%");
+      pending = false;
+    });
+  }
+
+  cards.forEach(function (card) {
+    card.addEventListener("pointermove", function (e) {
+      if (e.pointerType === "mouse") trackPointer(e, card);
+    }, { passive: true });
+
+    /* Tap mobile : un seul passage de lumière, pas de suivi du doigt
+       (suivre le doigt entre en conflit avec le scroll de la page). */
+    card.addEventListener("touchstart", function () {
+      card.classList.remove("is-tapped");
+      void card.offsetWidth; // relance l'animation si le tap est répété vite
+      card.classList.add("is-tapped");
+    }, { passive: true });
+
+    card.addEventListener("animationend", function (ev) {
+      if (ev.animationName === "dg-sweep") card.classList.remove("is-tapped");
+    });
+  });
+
+  /* Le liseré tournant du tier 3 ne tourne que si la carte est visible :
+     inutile de payer une animation GPU sous la ligne de flottaison. */
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    var premium = document.querySelectorAll(".dg-glass--3, .dg-glass--cta");
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        entry.target.style.setProperty(
+          "--dg-play",
+          entry.isIntersecting ? "running" : "paused"
+        );
+        var after = entry.target;
+        after.classList.toggle("dg-visible", entry.isIntersecting);
+      });
+    }, { threshold: 0.15 });
+    premium.forEach(function (el) { io.observe(el); });
+  }
+})();
+</script>
+
+<style>
+  /* Complète la pause/lecture pilotée par IntersectionObserver ci-dessus. */
+  .dg-glass--3.dg-visible::after { animation-play-state: running; }
+</style>
+
+<!--
+  OÙ COLLER CE BLOC DANS GOHIGHLEVEL
+  ==================================
+  1. Colle CE FICHIER ENTIER (style + script, tel quel) UNE SEULE FOIS
+     dans un élément "Custom Code / HTML" posé juste avant la section des
+     offres, OU dans les réglages de page > "Header Tracking Code"
+     (le script attend que les cartes existent dans le DOM, donc les deux
+     emplacements fonctionnent).
+
+  2. Sur chaque carte d'offre (l'élément Section/Row/Column qui contient
+     déjà le titre, le prix, la liste de contenu), ouvre l'onglet
+     "Advanced" du builder GHL et ajoute dans le champ "Custom Class" :
+       - Carte "Présence en ligne"   → dg-glass dg-glass--1
+       - Carte "Gestion Client"      → dg-glass dg-glass--2
+       - Carte "Acquisition"         → dg-glass dg-glass--3
+       - Bouton CTA final            → dg-glass dg-glass--cta
+
+     Si l'élément GHL que tu utilises n'expose pas de champ "Custom Class"
+     (ça dépend du type d'élément), place plutôt un élément "Custom HTML"
+     autour du contenu de la carte avec <div class="dg-glass dg-glass--2">
+     ... ton HTML de carte existant ... </div>.
+
+  3. Réglages à adapter (variables en haut du <style>) :
+       --dg-gold / --dg-navy   déjà calés sur #B8964F / #0B1F3A
+       --dg-radius             rayon des coins — aligne-le sur celui déjà
+                                utilisé par tes cartes GHL actuelles
+       --dg-blur                intensité du flou verre (défaut desktop
+                                20px, auto-réduit sur mobile ≤640px)
+       .dg-glass--1/2/3         intensité par palier — la doser plus fort
+                                si le fond de page est très chargé visuel-
+                                lement (le flou "mange" moins un fond uni)
+
+  4. Ne demande AUCUN texte supplémentaire — c'est un effet purement
+     visuel, aucune légende ni micro-copy à ajouter autour des cartes.
+-->

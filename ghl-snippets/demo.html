@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DG System — démo verre doré</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    background: radial-gradient(circle at 20% -10%, #12294a 0%, #0B1F3A 40%, #061323 100%);
+    color: #EFE7D6;
+    padding: 48px 20px 100px;
+  }
+  h1 {
+    font-family: "Arial Narrow", Arial, sans-serif;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: clamp(28px, 5vw, 44px);
+    text-align: center;
+    margin: 0 0 8px;
+  }
+  .sub {
+    text-align: center;
+    color: #B8964F;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin-bottom: 48px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+  .offer {
+    padding: 32px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .offer .tag {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #B8964F;
+  }
+  .offer h2 {
+    font-family: "Arial Narrow", Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-size: 24px;
+    margin: 0;
+  }
+  .offer .price {
+    font-size: 32px;
+    font-weight: 700;
+    color: #F4E9D0;
+  }
+  .offer .price small {
+    font-size: 14px;
+    color: #8a93a3;
+    text-decoration: line-through;
+    font-weight: 400;
+    margin-left: 8px;
+  }
+  .offer p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #cfd6e0;
+    margin: 0;
+  }
+  .offer ul {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+    font-size: 13px;
+    color: #b9c2d0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .offer li::before { content: "— "; color: #B8964F; }
+
+  .cta-wrap { text-align: center; margin-top: 56px; }
+  .cta {
+    padding: 18px 46px;
+    color: #F4E9D0;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Choisissez votre système</h1>
+<p class="sub">3 offres — une seule dépendance retirée à chaque niveau</p>
+
+<div class="grid">
+  <div class="offer dg-glass dg-glass--1">
+    <span class="tag">Présence en ligne</span>
+    <h2>Être trouvé, sans lever le doigt</h2>
+    <div class="price">497&nbsp;€ <small>997&nbsp;€</small></div>
+    <p>Site vitrine sur-mesure, calendrier de RDV connecté, domaine personnalisé.</p>
+    <ul>
+      <li>Formulaire de qualification</li>
+      <li>Signature email pro</li>
+      <li>Trame de carte de visite</li>
+    </ul>
+  </div>
+
+  <div class="offer dg-glass dg-glass--2">
+    <span class="tag">Gestion Client — places limitées</span>
+    <h2>Plus aucun client ne se perd</h2>
+    <div class="price">2000&nbsp;€ <small>2997&nbsp;€</small></div>
+    <p>Tout le contenu Présence, plus CRM complet et pipelines structurés.</p>
+    <ul>
+      <li>Relances SMS/email automatiques</li>
+      <li>Boîte de réception unifiée</li>
+      <li>Notification prospect chaud</li>
+    </ul>
+  </div>
+
+  <div class="offer dg-glass dg-glass--3">
+    <span class="tag">Acquisition</span>
+    <h2>De nouveaux clients, chaque semaine</h2>
+    <div class="price">7000&nbsp;€</div>
+    <p>Tout Gestion Client, plus tunnels multi-étapes et acquisition avancée.</p>
+    <ul>
+      <li>Espace membre / portail formation</li>
+      <li>Lead magnet + page de capture</li>
+      <li>Reporting ROI</li>
+    </ul>
+  </div>
+</div>
+
+<div class="cta-wrap">
+  <a href="#" class="cta dg-glass dg-glass--cta">Réserver un appel</a>
+</div>
+
+<!-- ============ EFFET (identique au snippet livré) ============ -->
+<style>
+  :root {
+    --dg-gold: #B8964F;
+    --dg-navy: #0B1F3A;
+    --dg-navy-deep: #071527;
+    --dg-radius: 18px;
+    --dg-blur: 20px;
+    --dg-border-op: 0.35;
+    --dg-tint-op: 0.14;
+  }
+  .dg-glass {
+    position: relative;
+    isolation: isolate;
+    border-radius: var(--dg-radius);
+    background:
+      linear-gradient(155deg,
+        rgba(184, 150, 79, var(--dg-tint-op)) 0%,
+        rgba(11, 31, 58, 0.55) 55%,
+        rgba(7, 21, 39, 0.72) 100%);
+    border: 1px solid rgba(184, 150, 79, var(--dg-border-op));
+    box-shadow:
+      0 10px 34px rgba(0, 0, 0, 0.38),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .dg-glass {
+      backdrop-filter: blur(var(--dg-blur)) saturate(135%);
+      -webkit-backdrop-filter: blur(var(--dg-blur)) saturate(135%);
+    }
+  }
+  .dg-glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      220px circle at var(--mx, 50%) var(--my, 20%),
+      rgba(255, 240, 210, 0.16),
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .dg-glass:hover::before { opacity: 1; }
+  }
+  .dg-glass--1 { --dg-blur: 14px; --dg-tint-op: 0.08; --dg-border-op: 0.25; }
+  .dg-glass--2 { --dg-blur: 18px; --dg-tint-op: 0.12; --dg-border-op: 0.32; }
+  .dg-glass--3 {
+    --dg-blur: 24px;
+    --dg-tint-op: 0.18;
+    --dg-border-op: 0.5;
+    box-shadow:
+      0 14px 44px rgba(0, 0, 0, 0.45),
+      0 0 0 1px rgba(184, 150, 79, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+  .dg-glass--3::after {
+    content: "";
+    position: absolute;
+    inset: -60%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      rgba(184, 150, 79, 0.55) 25deg,
+      transparent 70deg,
+      transparent 360deg
+    );
+    animation: dg-spin 7s linear infinite;
+    animation-play-state: paused;
+    pointer-events: none;
+  }
+  @keyframes dg-spin { to { transform: rotate(360deg); } }
+  .dg-glass--cta {
+    --dg-blur: 16px;
+    --dg-tint-op: 0.16;
+    --dg-border-op: 0.55;
+    display: inline-block;
+  }
+  .dg-glass--cta:hover,
+  .dg-glass--cta:focus-visible {
+    border-color: var(--dg-gold);
+    transform: translateY(-1px);
+    box-shadow: 0 12px 30px rgba(184, 150, 79, 0.25);
+  }
+  .dg-glass.is-tapped::before {
+    opacity: 1;
+    background: linear-gradient(
+      100deg,
+      transparent 30%,
+      rgba(255, 240, 210, 0.22) 50%,
+      transparent 70%
+    );
+    background-size: 250% 250%;
+    animation: dg-sweep 0.7s ease-out;
+  }
+  @keyframes dg-sweep {
+    from { background-position: 120% 0; }
+    to   { background-position: -20% 0; }
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .dg-glass {
+      background: linear-gradient(155deg, #10233d 0%, var(--dg-navy-deep) 100%);
+    }
+  }
+  @media (max-width: 640px) {
+    .dg-glass--1 { --dg-blur: 10px; }
+    .dg-glass--2 { --dg-blur: 12px; }
+    .dg-glass--3 { --dg-blur: 16px; }
+    .dg-glass--3::after { animation-duration: 10s; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dg-glass--3::after { animation: none; }
+    .dg-glass.is-tapped::before { animation: none; opacity: 0.6; }
+    .dg-glass { transition: none; }
+  }
+  .dg-glass--3.dg-visible::after { animation-play-state: running; }
+</style>
+<script>
+(function () {
+  "use strict";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var cards = document.querySelectorAll(".dg-glass");
+  if (!cards.length) return;
+  var pending = false;
+  function trackPointer(e, card) {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(function () {
+      var rect = card.getBoundingClientRect();
+      var x = ((e.clientX - rect.left) / rect.width) * 100;
+      var y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty("--mx", x + "%");
+      card.style.setProperty("--my", y + "%");
+      pending = false;
+    });
+  }
+  cards.forEach(function (card) {
+    card.addEventListener("pointermove", function (e) {
+      if (e.pointerType === "mouse") trackPointer(e, card);
+    }, { passive: true });
+    card.addEventListener("touchstart", function () {
+      card.classList.remove("is-tapped");
+      void card.offsetWidth;
+      card.classList.add("is-tapped");
+    }, { passive: true });
+    card.addEventListener("animationend", function (ev) {
+      if (ev.animationName === "dg-sweep") card.classList.remove("is-tapped");
+    });
+  });
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    var premium = document.querySelectorAll(".dg-glass--3, .dg-glass--cta");
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        entry.target.classList.toggle("dg-visible", entry.isIntersecting);
+      });
+    }, { threshold: 0.15 });
+    premium.forEach(function (el) { io.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>
