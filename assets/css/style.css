@@ -191,3 +191,24 @@ details > :not(summary) { margin: 0; padding: 0 16px 16px; }
   background: var(--blanc); border-radius: 0 var(--radius) var(--radius) 0;
   font-family: var(--titre); font-weight: 600; color: var(--marine); line-height: 1.45;
 }
+
+/* Listes */
+.liste { list-style: none; margin: 0 0 1.25rem; padding: 0; display: grid; gap: 12px; }
+.liste li { position: relative; padding-left: 28px; }
+.liste li::before {
+  content: ""; position: absolute; left: 4px; top: .6em;
+  width: 10px; height: 10px; border-radius: 50%;
+  border: 2px solid var(--marine);
+}
+.fort { font-weight: 600; color: var(--marine); }
+.replies { margin-top: 1.75rem; }
+
+/* Bloc 3 : Le parcours */
+.parcours { max-width: 400px; }
+.p-etape circle { stroke: #C9D1DE; transition: stroke .35s ease; }
+.p-etape > g { stroke: #9AA3B2; transition: stroke .35s ease; }
+.p-etape .p-plein { fill: #9AA3B2; stroke: none; transition: fill .35s ease; }
+.p-etape text { opacity: .45; transition: opacity .35s ease; }
+.p-etape.on circle, .p-etape.on > g { stroke: var(--marine); }
+.p-etape.on .p-plein { fill: var(--marine); }
+.p-etape.on text { opacity: 1; }
