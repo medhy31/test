@@ -173,3 +173,21 @@ details > :not(summary) { margin: 0; padding: 0 16px 16px; }
 @keyframes h-agenda { from { transform: translate(-26px, -8px) rotate(-6deg); } }
 @keyframes h-suivi { from { transform: translate(34px, 14px) rotate(5deg); } }
 @keyframes h-bulle { from { transform: translate(-14px, 16px) rotate(-4deg); } }
+
+.svg-xs { font-family: var(--corps); font-size: 11px; font-weight: 500; fill: var(--texte-2); }
+.svg-note { font-size: 14px; font-style: italic; }
+
+/* Mise en page texte + illustration */
+.split { display: grid; gap: 40px; align-items: center; }
+.split__art { margin: 0; width: 100%; max-width: 480px; justify-self: center; }
+@media (min-width: 900px) {
+  .split { grid-template-columns: 1fr 1fr; gap: 64px; }
+}
+
+/* Bloc 2 : La douleur */
+.question {
+  margin: 1.5rem 0 0; padding: 16px 20px;
+  border-left: 3px solid var(--marine);
+  background: var(--blanc); border-radius: 0 var(--radius) var(--radius) 0;
+  font-family: var(--titre); font-weight: 600; color: var(--marine); line-height: 1.45;
+}
