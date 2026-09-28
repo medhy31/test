@@ -212,3 +212,16 @@ details > :not(summary) { margin: 0; padding: 0 16px 16px; }
 .p-etape.on circle, .p-etape.on > g { stroke: var(--marine); }
 .p-etape.on .p-plein { fill: var(--marine); }
 .p-etape.on text { opacity: 1; }
+
+/* Bloc 4 : Le diagnostic */
+.liste--serree { gap: 6px; }
+.svg-l { font-family: var(--titre); font-size: 16px; font-weight: 600; fill: var(--marine); }
+.svg-p { font-family: var(--corps); font-size: 14px; font-weight: 600; fill: var(--marine); }
+.svg-p--plein { fill: #FFFFFF; }
+.d-solide { fill: var(--marine); }
+.d-construire { stroke: var(--marine); stroke-width: 1.5; }
+.illus .exemple {
+  display: table; margin: 12px auto 0; padding: 4px 12px;
+  border: 1px solid var(--trait); border-radius: 999px; background: var(--blanc);
+  font-size: .8125rem; font-weight: 500; color: var(--texte-2);
+}
