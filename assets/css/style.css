@@ -262,3 +262,13 @@ details > :not(summary) { margin: 0; padding: 0 16px 16px; }
 @media (min-width: 900px) {
   .transparence { grid-template-columns: repeat(3, 1fr); gap: 24px; }
 }
+
+/* Bloc 6 : Appel final */
+.portrait { margin: 0; width: 100%; max-width: 320px; justify-self: center; }
+.portrait__vide, .portrait img {
+  width: 100%; aspect-ratio: 1 / 1; border-radius: 14px;
+  background: var(--gris); border: 1px solid var(--trait); object-fit: cover;
+}
+.portrait figcaption { margin-top: 10px; text-align: center; font-size: .9375rem; color: var(--texte-2); }
+.faq { margin-top: 56px; max-width: 800px; }
+@media (min-width: 900px) { .faq { margin-left: auto; margin-right: auto; } }
