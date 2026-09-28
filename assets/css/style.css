@@ -225,3 +225,40 @@ details > :not(summary) { margin: 0; padding: 0 16px 16px; }
   border: 1px solid var(--trait); border-radius: 999px; background: var(--blanc);
   font-size: .8125rem; font-weight: 500; color: var(--texte-2);
 }
+
+/* Bloc 5 : Les packs */
+.packs__intro { max-width: 720px; }
+.svg-t--blanc { fill: #FFFFFF; }
+.escalier { margin: 32px auto 40px; max-width: 560px; }
+.packs { display: grid; gap: 20px; }
+@media (min-width: 900px) { .packs { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+.pack {
+  display: flex; flex-direction: column;
+  background: var(--blanc); border: 1px solid var(--trait); border-radius: 14px;
+  padding: 24px;
+}
+.pack__icone { margin-bottom: 16px; }
+.pack h3 { margin-bottom: .25rem; }
+.pack__promesse { color: var(--texte-2); margin-bottom: 1.25rem; }
+.pack .liste { font-size: 1rem; }
+.pack__prix {
+  margin: auto 0 16px; padding-top: 16px; border-top: 1px solid var(--gris);
+  font-family: var(--titre); font-weight: 700; font-size: 1.25rem; color: var(--marine);
+}
+.pack details { background: var(--fond); }
+.transparence {
+  list-style: none; margin: 32px 0 0; padding: 0;
+  display: grid; gap: 12px;
+}
+.transparence li {
+  position: relative; padding-left: 32px; color: var(--texte);
+}
+.transparence li::before {
+  content: ""; position: absolute; left: 4px; top: .35em;
+  width: 7px; height: 12px;
+  border-right: 2px solid var(--marine); border-bottom: 2px solid var(--marine);
+  transform: rotate(45deg);
+}
+@media (min-width: 900px) {
+  .transparence { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+}
