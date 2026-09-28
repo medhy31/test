@@ -139,3 +139,37 @@ details > :not(summary) { margin: 0; padding: 0 16px 16px; }
 @media (min-width: 768px) {
   .footer__inner { flex-direction: row; justify-content: space-between; align-items: center; }
 }
+
+/* Textes dans les SVG */
+.svg-t { font-family: var(--titre); font-size: 15px; font-weight: 600; fill: var(--marine); }
+.svg-s { font-family: var(--corps); font-size: 13px; fill: var(--texte-2); }
+
+/* Bloc 1 : Hero */
+.hero { padding: 40px 0 64px; }
+.hero__grid { display: grid; gap: 40px; align-items: center; }
+.eyebrow {
+  font-family: var(--titre); font-weight: 600; font-size: .875rem;
+  text-transform: uppercase; letter-spacing: .08em; color: var(--texte-2);
+  margin-bottom: 1rem;
+}
+.hero .lead { margin-bottom: 1.75rem; }
+.hero__art { margin: 0; max-width: 460px; justify-self: center; width: 100%; }
+.hero__art svg {
+  overflow: visible;
+  transform: perspective(1200px) rotateY(-9deg) rotateX(5deg);
+  filter: drop-shadow(0 18px 30px rgba(20, 33, 61, .08));
+}
+@media (min-width: 900px) {
+  .hero { padding: 72px 0 96px; }
+  .hero__grid { grid-template-columns: 1.1fr .9fr; gap: 56px; }
+}
+
+.h-card { transform-box: fill-box; transform-origin: center; }
+.motion .h-fiche { animation: h-fiche 1s ease-out .15s both; }
+.motion .h-card--agenda { animation: h-agenda 1s cubic-bezier(.2,.7,.2,1) .15s both; }
+.motion .h-card--suivi { animation: h-suivi 1s cubic-bezier(.2,.7,.2,1) .15s both; }
+.motion .h-card--bulle { animation: h-bulle 1s cubic-bezier(.2,.7,.2,1) .15s both; }
+@keyframes h-fiche { 0%, 55% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes h-agenda { from { transform: translate(-26px, -8px) rotate(-6deg); } }
+@keyframes h-suivi { from { transform: translate(34px, 14px) rotate(5deg); } }
+@keyframes h-bulle { from { transform: translate(-14px, 16px) rotate(-4deg); } }
