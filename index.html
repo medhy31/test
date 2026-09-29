@@ -8,7 +8,7 @@
   <link rel="icon" href="assets/img/dg-system-lockup-marine.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -24,100 +24,38 @@
   </header>
 
   <main id="contenu" class="page">
-    <!-- Fil visuel : une démo d'interface (exemple illustratif), fixe à droite en bureau.
-         Sur mobile, chaque bloc affiche son étape sous son texte. -->
-    <aside class="fil-col" aria-label="Exemple illustratif du système">
-      <div class="fil" id="fil" role="img" aria-label="Exemple illustratif : des outils éparpillés (formulaire, agenda, tableur, boîte mail) se rangent dans un seul tableau de suivi, où un prospect passe de Nouveau à Relancé puis à Réservé."></div>
-    </aside>
-
-    <template id="demo-tpl">
-      <div class="demo" data-etape="0" data-col="0">
-        <div class="demo__cadre">
-          <div class="demo__scene">
-            <div class="fen fen--mail">
-              <div class="fen__barre"><i></i><i></i><i></i><span>Boîte mail</span></div>
-              <ul class="mails">
-                <li class="non-lu"><b>Demande d'information</b><em>Bonjour, je voudrais savoir si…</em></li>
-                <li><b>Re : disponibilités</b><em>Merci pour votre retour…</em></li>
-                <li><b>Question sur l'offre</b><em>Est-ce que l'accompagnement…</em></li>
-              </ul>
-              <span class="badge">Sans réponse</span>
-            </div>
-            <div class="fen fen--agenda">
-              <div class="fen__barre"><i></i><i></i><i></i><span>Agenda</span></div>
-              <div class="semaine"><span>Lun</span><span>Mar</span><span>Mer</span><span>Jeu</span><span>Ven</span>
-                <b style="grid-column:1;grid-row:2"></b><b style="grid-column:3;grid-row:3"></b><b class="or" style="grid-column:4;grid-row:2"></b><b style="grid-column:2;grid-row:4"></b><b style="grid-column:5;grid-row:3"></b></div>
-            </div>
-            <div class="fen fen--tableur">
-              <div class="fen__barre"><i></i><i></i><i></i><span>Tableur</span></div>
-              <div class="tableur"><span>Contact</span><span>Source</span><span>Statut</span><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
-            </div>
-            <div class="fen fen--form">
-              <div class="fen__barre"><i></i><i></i><i></i><span>Formulaire du site</span></div>
-              <div class="formulaire"><label>Nom</label><b></b><label>Email</label><b></b><label>Message</label><b class="haut"></b></div>
-            </div>
-
-            <div class="app">
-              <div class="app__barre"><i></i><i></i><i></i><span>Suivi des prospects</span></div>
-              <div class="app__corps">
-                <nav class="app__nav"><svg class="ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5 8 4l5 4.5V13H3z"/></svg><svg class="ic actif" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="6" r="2.5"/><path d="M3.5 13c.7-2.3 2.4-3.3 4.5-3.3s3.8 1 4.5 3.3"/></svg><svg class="ic" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="3.5" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3"/></svg><svg class="ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 4.5h11v7h-6l-3 2v-2h-2z"/></svg></nav>
-                <div class="app__main">
-                  <p class="app__titre">Pipeline</p>
-                  <div class="cols">
-                    <div class="colonne"><p class="colonne__titre"><i></i>Nouveau</p>
-                      <div class="carte"><b>Appel manqué</b><em>SMS envoyé</em></div>
-                      <div class="carte"><b>Demande d'information</b><em>Formulaire du site</em></div></div>
-                    <div class="colonne"><p class="colonne__titre"><i></i>Relancé</p>
-                      <div class="carte"><b>Devis envoyé</b><em>Relance programmée</em></div></div>
-                    <div class="colonne"><p class="colonne__titre"><i class="or"></i>Réservé</p>
-                      <div class="carte"><b>Séance découverte</b><em>Rappel envoyé</em></div></div>
-                  </div>
-                  <div class="carte carte--active"><b>Demande de rendez-vous</b><em>Formulaire du site</em></div>
-                </div>
-              </div>
-              <p class="notif notif--relance"><span class="notif__ico"></span>Relance envoyée automatiquement</p>
-              <p class="notif notif--rdv"><span class="notif__ico"></span>Rendez-vous confirmé</p>
-            </div>
-            <p class="demo__legende">Exemple illustratif</p>
-          </div>
-        </div>
-      </div>
-    </template>
 
     <!-- Bloc 1 : Hero -->
-    <section class="section section--sombre hero" id="top" data-fil="0" aria-labelledby="hero-titre">
+    <section class="section section--sombre hero" id="top" aria-labelledby="hero-titre">
       <div class="wrap">
         <div class="col">
           <h1 id="hero-titre">Transformez votre présence en ligne en un actif digital qui capte, relance et convertit vos prospects.</h1>
           <p class="lead">Que vous ayez besoin d'être simplement trouvé, ou d'un système complet qui vend et fidélise à votre place, chaque brique s'ajoute selon ce que votre activité demande.</p>
           <a class="btn" data-cta href="#reserver">Voir l'état de mon actif digital</a>
           <p class="micro">Un appel en direct, gratuit, sans engagement.</p>
-          <figure class="fil-etape" data-etape="0" aria-hidden="true"></figure>
         </div>
       </div>
     </section>
 
     <!-- Bloc 2 : La douleur -->
-    <section class="section section--clair" data-fil="1" aria-labelledby="douleur-titre">
+    <section class="section section--clair" aria-labelledby="douleur-titre">
       <div class="wrap">
         <div class="col">
           <h2 id="douleur-titre">Où votre activité vous fait-elle perdre le plus de temps aujourd'hui ?</h2>
           <p>Être trouvé. Ne rien laisser filer. Ne plus jongler entre trois outils qui ne se parlent pas. Que vous ayez déjà tout construit à la main, ou rien construit du tout, la cause est la même : le temps de poser un vrai système n'est jamais venu.</p>
           <p class="question">Combien de prospects sont passés à côté sans que vous le sachiez ?</p>
           <p class="chute">Il existe une façon de ne plus jamais se poser cette question.</p>
-          <figure class="fil-etape" data-etape="1" aria-hidden="true"></figure>
         </div>
       </div>
     </section>
 
     <!-- Bloc 3 : Le mécanisme -->
-    <section class="section section--panneau" data-fil="2" data-trace="defilement" aria-labelledby="meca-titre">
+    <section class="section section--panneau" aria-labelledby="meca-titre">
       <div class="wrap">
         <div class="col">
           <h2 id="meca-titre">Un actif digital, c'est ce que DG System construit pour vous.</h2>
           <!-- Modifié à la demande de Medhy : « En 2026 » remplacé par « Aujourd'hui ». -->
           <p>Il y a dix ans, avoir un site suffisait à exister en ligne. Aujourd'hui, exister ne suffit plus : il faut répondre, relancer et convertir à la vitesse à laquelle vos prospects décident. Un actif digital, ça commence par un site qui capte à votre place. Ça peut aller jusqu'à une communauté qui vit sans vous, ou un système épaulé par l'IA pour ne plus jamais laisser un message sans réponse.</p>
-          <figure class="fil-etape" data-etape="2" aria-hidden="true"></figure>
 
           <div class="replies">
             <details>
@@ -135,7 +73,7 @@
 
     <!-- Bloc 4 : Le diagnostic -->
     <!-- SECTION À RETRAVAILLER LA PROCHAINE SESSION : le texte ci-dessous est validé, mais le visuel prévu (checklist multi-domaines) n'est pas encore défini. Utilise pour l'instant un simple bloc texte + bouton, sans visuel spécifique. -->
-    <section class="section section--clair" id="reserver" data-fil="3" aria-labelledby="diag-titre">
+    <section class="section section--clair" id="reserver" aria-labelledby="diag-titre">
       <div class="wrap">
         <div class="col">
           <h2 id="diag-titre">Ce n'est pas un audit technique. C'est un état des lieux de votre système actuel.</h2>
@@ -163,12 +101,11 @@
     </section>
 
     <!-- Bloc 5 : Les packs -->
-    <section class="section section--panneau" data-fil="3" aria-labelledby="packs-titre">
+    <section class="section section--panneau" aria-labelledby="packs-titre">
       <div class="wrap">
         <div class="col">
           <h2 id="packs-titre">Une fois le diagnostic fait, on construit ce qu'il faut pour faire grandir votre activité.</h2>
           <p>Que vous ayez besoin d'exister en ligne, de reprendre le contrôle sur ce que vous avez déjà, ou de faire vivre une communauté qui vous rapporte, il y a un point de départ pour votre situation.</p>
-          <figure class="fil-etape" data-etape="3" aria-hidden="true"></figure>
 
           <div class="packs">
             <article class="pack" aria-labelledby="pack-1">
@@ -235,13 +172,12 @@
 
     <!-- Bloc 6 : Appel final -->
     <!-- SECTION À RETRAVAILLER LA PROCHAINE SESSION : texte provisoire ci-dessous, pas encore challengé avec les mêmes itérations que les blocs 1 à 5. -->
-    <section class="section section--sombre final" data-fil="4" aria-labelledby="final-titre">
+    <section class="section section--sombre final" aria-labelledby="final-titre">
       <div class="wrap">
         <div class="col">
           <h2 id="final-titre">Qu'est-ce qui vous semble le plus urgent à régler ?</h2>
           <p class="lead">Chaque diagnostic est un appel en direct, avec moi. C'est pourquoi j'en prends un nombre limité par semaine.</p>
-          <figure class="fil-etape" data-etape="4" aria-hidden="true"></figure>
-          <a class="btn final__btn" data-cta data-convergence href="#reserver">Voir l'état de mon actif digital</a>
+          <a class="btn final__btn" data-cta href="#reserver">Voir l'état de mon actif digital</a>
           <!-- À AJOUTER quand ce sera vrai : "Ce site tourne sur le système que j'installe." -->
 
           <figure class="portrait">
