@@ -24,10 +24,51 @@
   </header>
 
   <main id="contenu" class="page">
-    <!-- Fil visuel : un seul élément, fixe à droite en bureau (les étapes mobiles sont dans chaque bloc) -->
-    <aside class="fil-col" aria-label="Fil visuel">
-      <div class="fil" id="fil" role="img" aria-label="Des fragments dispersés se relient en un système, qui se ramifie en trois branches (Présence en ligne, Pilotage commercial, Écosystème), puis converge vers un seul point : le rendez-vous."></div>
+    <!-- Fil visuel : une démo d'interface (exemple illustratif), fixe à droite en bureau.
+         Sur mobile, chaque bloc affiche son étape sous son texte. -->
+    <aside class="fil-col" aria-label="Exemple illustratif du système">
+      <div class="fil" id="fil" role="img" aria-label="Exemple illustratif : des outils éparpillés (formulaire, agenda, tableur, boîte mail) se rangent dans un seul tableau de suivi, où un prospect passe de Nouveau à Relancé puis à Réservé."></div>
     </aside>
+
+    <template id="demo-tpl">
+      <div class="demo" data-etape="0" data-col="0">
+        <div class="demo__cadre">
+          <div class="demo__scene">
+            <div class="fen fen--form">
+              <div class="fen__barre"><i></i><i></i><i></i><span>Formulaire</span></div>
+              <div class="fen__corps"><b class="champ"></b><b class="champ"></b><b class="champ champ--court"></b><b class="envoyer"></b></div>
+            </div>
+            <div class="fen fen--agenda">
+              <div class="fen__barre"><i></i><i></i><i></i><span>Agenda</span></div>
+              <div class="fen__corps grille"><b></b><b></b><b></b><b></b><b></b><b></b><b class="plein"></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
+            </div>
+            <div class="fen fen--tableur">
+              <div class="fen__barre"><i></i><i></i><i></i><span>Tableur</span></div>
+              <div class="fen__corps tableur"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
+            </div>
+            <div class="fen fen--mail">
+              <div class="fen__barre"><i></i><i></i><i></i><span>Boîte mail</span></div>
+              <div class="fen__corps"><b class="ligne"></b><b class="ligne"></b><b class="ligne ligne--court"></b></div>
+              <span class="badge">Message sans réponse</span>
+            </div>
+
+            <div class="board">
+              <p class="board__titre">Suivi des prospects</p>
+              <div class="board__cols">
+                <div class="board__col"><span>Nouveau</span><b class="ghost ghost--2"></b><b class="ghost ghost--3"></b></div>
+                <div class="board__col"><span>Relancé</span><b class="ghost ghost--2"></b></div>
+                <div class="board__col"><span>Réservé</span><b class="ghost ghost--2"></b></div>
+              </div>
+              <div class="prospect"><span class="prospect__pastille"></span><span class="prospect__nom">Prospect</span><b></b><b class="court"></b></div>
+            </div>
+
+            <p class="toast toast--relance"><span class="toast__ico"></span>Relance envoyée</p>
+            <p class="toast toast--rdv"><span class="toast__ico"></span>Rendez-vous confirmé</p>
+          </div>
+        </div>
+        <p class="demo__legende">Exemple illustratif</p>
+      </div>
+    </template>
 
     <!-- Bloc 1 : Hero -->
     <section class="section section--sombre hero" id="top" data-fil="0" aria-labelledby="hero-titre">
@@ -80,7 +121,7 @@
 
     <!-- Bloc 4 : Le diagnostic -->
     <!-- SECTION À RETRAVAILLER LA PROCHAINE SESSION : le texte ci-dessous est validé, mais le visuel prévu (checklist multi-domaines) n'est pas encore défini. Utilise pour l'instant un simple bloc texte + bouton, sans visuel spécifique. -->
-    <section class="section section--clair" id="reserver" data-fil="2" aria-labelledby="diag-titre">
+    <section class="section section--clair" id="reserver" data-fil="3" aria-labelledby="diag-titre">
       <div class="wrap">
         <div class="col">
           <h2 id="diag-titre">Ce n'est pas un audit technique. C'est un état des lieux de votre système actuel.</h2>

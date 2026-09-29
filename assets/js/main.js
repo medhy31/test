@@ -8,200 +8,73 @@ document.querySelectorAll("[data-cta]").forEach((a) => {
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ------------------------------------------------------------------
-   Fil visuel : un seul dessin qui raconte le texte.
-   Étape 0 repos · 1 fragments dispersés · 2 système relié
-   · 3 trois branches (une par pack) · 4 convergence vers le bouton.
+   Fil visuel : une démo d'interface (exemple illustratif).
+   Étape 0 repos · 1 outils éparpillés · 2 tout se range dans le suivi,
+   la fiche avance au défilement · 3 et 4 prospect réservé.
    ------------------------------------------------------------------ */
-const NS = "http://www.w3.org/2000/svg";
-const ACCENT = "#6C8EFF";
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const tpl = document.getElementById("demo-tpl");
+const SCENE_W = 360, SCENE_H = 520;
 
-const POS = {
-  repos:     [[140, 230, 0], [260, 230, 0], [110, 300, 0], [290, 300, 0], [140, 370, 0], [260, 370, 0]],
-  disperses: [[80, 120, -12], [310, 90, 10], [50, 320, 7], [335, 290, -9], [115, 500, 11], [295, 480, -6]],
-  systeme:   [[200, 140, 0], [330, 220, 0], [330, 380, 0], [200, 460, 0], [70, 380, 0], [70, 220, 0]],
-};
-const HUB = [200, 300];
-/* Anneau puis rayons vers le centre (6 = centre) */
-const PAIRES = [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 0], [0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6]];
-const BRANCHES = [
-  { x: 75, label: ["Présence", "en ligne"] },
-  { x: 200, label: ["Pilotage", "commercial"] },
-  { x: 325, label: ["Écosystème"] },
-];
-const Y_BRANCHE = 430;
-const PY_DEFAUT = 540;
-
-/* Vecteur d'état : 18 valeurs de nœuds, puis trace, échelle, décalage,
-   branches, libellés, convergence, hauteur du point, ligne vers le bouton. */
-const I = { trace: 18, s: 19, dy: 20, branche: 21, labels: 22, conv: 23, py: 24, hl: 25, yb: 26 };
-const etape = (pos, o) => [...pos.flat(), o.trace, o.s, o.dy, o.branche, o.labels, o.conv, o.py ?? PY_DEFAUT, o.hl ?? 0, o.yb ?? Y_BRANCHE];
-const ETAPES = [
-  etape(POS.repos,     { trace: 0, s: 1, dy: 0, branche: 0, labels: 0, conv: 0 }),
-  etape(POS.disperses, { trace: 0, s: 1, dy: 0, branche: 0, labels: 0, conv: 0 }),
-  etape(POS.systeme,   { trace: 1, s: 1, dy: 0, branche: 0, labels: 0, conv: 0 }),
-  etape(POS.systeme,   { trace: 1, s: .5, dy: -150, branche: 1, labels: 1, conv: 0 }),
-  etape(POS.systeme,   { trace: 1, s: .38, dy: -225, branche: 1, labels: 0, conv: 1, hl: 1, yb: 210, py: 330 }),
-];
-/* Cadrage de chaque étape affichée seule (mobile) */
-const CADRAGES = ["0 180 400 240", "0 50 400 510", "0 110 400 400", "0 40 400 450", "0 0 400 360"];
-
-function nouveau(nom, attrs, parent) {
-  const e = document.createElementNS(NS, nom);
-  for (const k in attrs) e.setAttribute(k, attrs[k]);
-  if (parent) parent.appendChild(e);
-  return e;
+function creerDemo(hote) {
+  const demo = tpl.content.firstElementChild.cloneNode(true);
+  hote.appendChild(demo);
+  const cadre = demo.querySelector(".demo__cadre");
+  const ajuster = () => {
+    const w = hote.clientWidth - parseFloat(getComputedStyle(hote).paddingLeft) * 2;
+    const hMax = hote.dataset.hauteur ? hote.clientHeight - 80 : Infinity;
+    const k = Math.min(w / SCENE_W, hMax / SCENE_H, 1.25);
+    cadre.style.setProperty("--k", k);
+    cadre.style.width = SCENE_W * k + "px";
+    cadre.style.height = SCENE_H * k + "px";
+  };
+  ajuster();
+  window.addEventListener("resize", ajuster);
+  return demo;
 }
 
-function construireFil() {
-  const svg = nouveau("svg", { viewBox: "0 0 400 600", fill: "none", "aria-hidden": "true", focusable: "false" });
-  const trait = { stroke: ACCENT, "stroke-width": 1.5, "stroke-linecap": "round", fill: "none", pathLength: 1, "stroke-dasharray": 1, "vector-effect": "non-scaling-stroke" };
-
-  const sys = nouveau("g", {}, svg);
-  const lignes = PAIRES.map(() => nouveau("path", trait, sys));
-  const hub = nouveau("circle", { cx: HUB[0], cy: HUB[1], r: 7, fill: ACCENT }, sys);
-  const noeuds = POS.repos.map(() => {
-    const g = nouveau("g", {}, sys);
-    nouveau("rect", { x: -29, y: -19, width: 58, height: 38, rx: 7, fill: "#2A3A5C", stroke: "rgba(237,242,249,.45)", "stroke-width": 1.25 }, g);
-    nouveau("path", { d: "M-18 -5h24M-18 5h36", stroke: "rgba(237,242,249,.5)", "stroke-width": 2, "stroke-linecap": "round" }, g);
-    return g;
-  });
-
-  const branches = BRANCHES.map((b) => {
-    const chemin = nouveau("path", trait, svg);
-    const point = nouveau("circle", { cx: b.x, cy: Y_BRANCHE, r: 6, fill: "#14213D", stroke: ACCENT, "stroke-width": 1.5 }, svg);
-    const texte = nouveau("text", { x: b.x, y: Y_BRANCHE + 34, "text-anchor": "middle", class: "f-label" }, svg);
-    b.label.forEach((ligne, k) => {
-      const t = nouveau("tspan", { x: b.x, dy: k ? 19 : 0 }, texte);
-      t.textContent = ligne;
-    });
-    return { chemin, point, texte, x: b.x };
-  });
-
-  const convergences = BRANCHES.map(() => nouveau("path", trait, svg));
-  const versBouton = nouveau("path", trait, svg);
-  const cible = nouveau("circle", { cx: 200, cy: PY_DEFAUT, r: 8, fill: ACCENT }, svg);
-
-  function rendre(v) {
-    const s = v[I.s], dy = v[I.dy], trace = v[I.trace], py = v[I.py], yb = v[I.yb];
-    sys.setAttribute("transform", `translate(0 ${dy}) translate(200 300) scale(${s}) translate(-200 -300)`);
-    const pt = (k) => (k === 6 ? HUB : [v[k * 3], v[k * 3 + 1]]);
-    noeuds.forEach((g, k) => g.setAttribute("transform", `translate(${v[k * 3]} ${v[k * 3 + 1]}) rotate(${v[k * 3 + 2]})`));
-    lignes.forEach((l, k) => {
-      const [a, b] = PAIRES[k];
-      const A = pt(a), B = pt(b);
-      const p = clamp(trace * PAIRES.length - k);
-      l.setAttribute("d", `M${A[0]} ${A[1]}L${B[0]} ${B[1]}`);
-      l.style.strokeDashoffset = 1 - p;
-      l.style.opacity = p > 0.001 ? 1 : 0;
-    });
-    hub.style.opacity = clamp(trace * 1.5 - 0.5);
-
-    const oy = 300 + 179 * s + dy;
-    branches.forEach((b, k) => {
-      const p = clamp(v[I.branche] * 1.6 - k * 0.3);
-      const m = (yb - oy) * 0.45;
-      b.chemin.setAttribute("d", `M200 ${oy}C200 ${oy + m} ${b.x} ${yb - m} ${b.x} ${yb}`);
-      b.point.setAttribute("cy", yb);
-      b.texte.setAttribute("y", yb + 34);
-      b.chemin.style.strokeDashoffset = 1 - p;
-      b.chemin.style.opacity = p > 0.001 ? 1 : 0;
-      const fin = clamp((p - 0.8) * 5);
-      b.point.style.opacity = fin;
-      b.texte.style.opacity = fin * v[I.labels];
-    });
-
-    const c = v[I.conv];
-    convergences.forEach((l, k) => {
-      const x = BRANCHES[k].x, y0 = yb + 7, h = py - y0;
-      const p = clamp(c * 1.6 - k * 0.3);
-      l.setAttribute("d", `M${x} ${y0}C${x} ${y0 + h * 0.6} 200 ${py - h * 0.6} 200 ${py}`);
-      l.style.strokeDashoffset = 1 - p;
-      l.style.opacity = p > 0.001 ? 1 : 0;
-    });
-    const fin = clamp(c * 2 - 1);
-    cible.setAttribute("cy", py);
-    cible.style.opacity = fin;
-    versBouton.setAttribute("d", `M200 ${py}H0`);
-    const h = fin * v[I.hl];
-    versBouton.style.strokeDashoffset = 1 - h;
-    versBouton.style.opacity = h > 0.001 ? 1 : 0;
-  }
-
-  return { svg, rendre, cible };
+function regler(demo, etape, p = 1) {
+  const col = etape < 2 ? 0 : etape > 2 ? 2 : p < 0.35 ? 0 : p < 0.7 ? 1 : 2;
+  demo.dataset.etape = etape;
+  demo.dataset.col = col;
 }
 
 /* Mobile : chaque bloc montre son étape, sous son texte. */
-document.querySelectorAll(".fil-etape[data-etape]").forEach((fig) => {
+const demosMobiles = [...document.querySelectorAll(".fil-etape[data-etape]")].map((fig) => {
+  const demo = creerDemo(fig);
   const n = +fig.dataset.etape;
-  const f = construireFil();
-  f.svg.setAttribute("viewBox", CADRAGES[n]);
-  fig.appendChild(f.svg);
-  const v = ETAPES[n].slice();
-  v[I.hl] = 0;
-  f.rendre(v);
+  regler(demo, n, reduceMotion ? 1 : 0);
+  return { fig, demo, n };
 });
 
-/* Bureau : un seul fil, fixe à droite, qui évolue avec le défilement. */
-(() => {
-  const hote = document.getElementById("fil");
-  if (!hote) return;
-  const f = construireFil();
-  hote.appendChild(f.svg);
-  const sections = [...document.querySelectorAll("[data-fil]")];
-  const bouton = document.querySelector("[data-convergence]");
-  const bureau = window.matchMedia("(min-width: 1024px)");
-  if (!sections.length) return;
+/* Bureau : une seule démo, fixe à droite, qui suit le défilement. */
+const hote = document.getElementById("fil");
+if (hote) hote.dataset.hauteur = "1";
+const demoBureau = hote && creerDemo(hote);
+const sections = [...document.querySelectorAll("[data-fil]")];
 
-  if (reduceMotion) {
-    f.rendre(ETAPES[4]);
-    return;
-  }
-
-  const actuel = ETAPES[0].slice();
-  let boucle = false;
-
-  const cible = () => {
-    const vh = window.innerHeight;
-    let sec = sections[0];
-    for (const s of sections) if (s.getBoundingClientRect().top <= vh * 0.5) sec = s;
-    const n = +sec.dataset.fil;
-    const t = ETAPES[n].slice();
-    if (sec.dataset.trace === "defilement") {
+function suivre() {
+  const vh = window.innerHeight;
+  if (demoBureau && sections.length) {
+    if (reduceMotion) { regler(demoBureau, 4); }
+    else {
+      let sec = sections[0];
+      for (const s of sections) if (s.getBoundingClientRect().top <= vh * 0.5) sec = s;
+      const n = +sec.dataset.fil;
       const r = sec.getBoundingClientRect();
-      t[I.trace] = clamp((vh * 0.5 - r.top) / (vh * 0.5 - 72 + r.height * 0.35));
+      regler(demoBureau, n, clamp((vh * 0.5 - r.top) / r.height));
     }
-    if (n === 4 && bouton) {
-      const r = bouton.getBoundingClientRect();
-      const m = f.svg.getScreenCTM();
-      if (m) {
-        const p = new DOMPoint(0, r.top + r.height / 2).matrixTransform(m.inverse());
-        t[I.py] = clamp(p.y, t[I.yb] + 40, 585);
-      }
-    }
-    return t;
-  };
+  }
+  if (!reduceMotion) {
+    demosMobiles.filter((d) => d.n === 2).forEach(({ fig, demo }) => {
+      const r = fig.getBoundingClientRect();
+      regler(demo, 2, clamp((vh * 0.8 - r.top) / (vh * 0.55)));
+    });
+  }
+}
 
-  const image = () => {
-    const t = cible();
-    let ecart = 0;
-    for (let k = 0; k < actuel.length; k++) {
-      actuel[k] += (t[k] - actuel[k]) * 0.1;
-      ecart = Math.max(ecart, Math.abs(t[k] - actuel[k]));
-    }
-    f.rendre(actuel);
-    if (ecart > 0.002) requestAnimationFrame(image);
-    else boucle = false;
-  };
-
-  const relancer = () => {
-    if (!bureau.matches || boucle) return;
-    boucle = true;
-    requestAnimationFrame(image);
-  };
-
-  f.rendre(actuel);
-  window.addEventListener("scroll", relancer, { passive: true });
-  window.addEventListener("resize", relancer);
-  relancer();
-})();
+let attente = false;
+const demander = () => { if (!attente) { attente = true; requestAnimationFrame(() => { attente = false; suivre(); }); } };
+window.addEventListener("scroll", demander, { passive: true });
+window.addEventListener("resize", demander);
+suivre();

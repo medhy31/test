@@ -118,33 +118,147 @@ a { color: inherit; }
 .section--sombre .lead, .section--sombre .micro { color: var(--sur-sombre-2); }
 .section--clair .micro, .section--panneau .micro { color: var(--marine-2); }
 
-/* Fil visuel (bureau) */
+/* Fil visuel (bureau) : la démo reste fixe à droite */
 .fil-col { display: none; }
 @media (min-width: 1024px) {
   .fil-col {
     display: block; position: absolute; top: 0; bottom: 0; z-index: 5;
     right: max(32px, calc((100% - 1200px) / 2 + 32px));
-    width: var(--fil-w); pointer-events: none;
+    width: var(--fil-w);
   }
   .fil {
     position: sticky; top: calc(var(--header-h) + 24px);
-    height: calc(100vh - var(--header-h) - 48px); max-height: 760px;
-    background: var(--marine); border: 1px solid var(--marine-2); border-radius: 16px;
-    padding: 20px; display: flex; align-items: center; justify-content: center;
+    height: calc(100vh - var(--header-h) - 48px); max-height: 680px;
+    background: var(--marine); border: 1px solid var(--marine-2); border-radius: 18px;
+    padding: 24px; display: flex; align-items: center; justify-content: center;
   }
-  .fil svg { width: 100%; height: 100%; }
   .fil-etape { display: none; }
 }
 
 /* Fil visuel (mobile) : l'étape du bloc, sous son texte */
 .fil-etape {
   margin: 32px 0 0; background: var(--marine); border: 1px solid var(--marine-2);
-  border-radius: 14px; padding: 12px;
+  border-radius: 16px; padding: 16px;
 }
-.fil-etape svg { width: 100%; max-width: 360px; max-height: 340px; margin: 0 auto; }
 
-/* Textes du fil */
-.f-label { font-family: var(--corps); font-size: 16px; font-weight: 500; fill: var(--sur-sombre); }
+/* ---- Démo d'interface (exemple illustratif) ---- */
+.demo { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.demo__cadre { position: relative; overflow: hidden; }
+.demo__scene {
+  position: absolute; left: 0; top: 0; width: 360px; height: 520px;
+  transform: scale(var(--k, 1)); transform-origin: 0 0;
+  font-family: var(--corps); color: var(--texte);
+}
+.demo__legende {
+  margin: 0; font-size: .8125rem; color: var(--sur-sombre-2);
+  padding: 3px 10px; border: 1px solid var(--marine-2); border-radius: 999px;
+}
+.demo b { display: block; }
+
+/* Fenêtres d'outils */
+.fen {
+  position: absolute; left: 0; top: 0; width: 160px; height: 104px;
+  background: var(--fond); border-radius: 10px; overflow: visible;
+  box-shadow: 0 10px 24px rgba(3, 8, 20, .35);
+  transition: transform .7s cubic-bezier(.2,.7,.2,1), opacity .5s ease;
+}
+.fen__barre {
+  display: flex; align-items: center; gap: 4px; height: 24px; padding: 0 8px;
+  background: var(--panneau); border-radius: 10px 10px 0 0;
+  font-size: 11px; font-weight: 500; color: var(--marine-2);
+}
+.fen__barre i { width: 6px; height: 6px; border-radius: 50%; background: var(--trait-clair); }
+.fen__barre span { margin-left: 6px; }
+.fen__corps { padding: 10px; display: grid; gap: 6px; }
+.champ { height: 10px; border-radius: 3px; background: var(--panneau); border: 1px solid var(--trait-clair); }
+.champ--court { width: 60%; }
+.envoyer { height: 10px; width: 40%; border-radius: 3px; background: var(--marine-2); }
+.grille { grid-template-columns: repeat(5, 1fr); gap: 4px; }
+.grille b { height: 14px; border-radius: 3px; background: var(--panneau); }
+.grille b.plein { background: var(--marine-2); }
+.tableur { grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--trait-clair); margin: 10px; padding: 0; }
+.tableur b { height: 14px; border-right: 1px solid var(--trait-clair); border-bottom: 1px solid var(--trait-clair); }
+.ligne { height: 12px; border-radius: 3px; background: var(--panneau); }
+.ligne--court { width: 65%; }
+.badge {
+  position: absolute; right: -10px; top: -12px; opacity: 0;
+  background: var(--profond); color: var(--sur-sombre); border: 1px solid var(--or);
+  font-size: 11px; font-weight: 600; padding: 4px 8px; border-radius: 999px; white-space: nowrap;
+  transition: opacity .4s ease .3s;
+}
+
+/* Positions des fenêtres selon l'étape */
+.demo[data-etape="0"] .fen--form    { transform: translate(12px, 110px); }
+.demo[data-etape="0"] .fen--agenda  { transform: translate(188px, 110px); }
+.demo[data-etape="0"] .fen--tableur { transform: translate(12px, 240px); }
+.demo[data-etape="0"] .fen--mail    { transform: translate(188px, 240px); }
+.demo[data-etape="1"] .fen--form    { transform: translate(0, 40px) rotate(-7deg); }
+.demo[data-etape="1"] .fen--agenda  { transform: translate(196px, 12px) rotate(6deg); }
+.demo[data-etape="1"] .fen--tableur { transform: translate(22px, 262px) rotate(5deg); }
+.demo[data-etape="1"] .fen--mail    { transform: translate(186px, 316px) rotate(-5deg); }
+.demo[data-etape="1"] .badge { opacity: 1; }
+.demo:is([data-etape="2"], [data-etape="3"], [data-etape="4"]) .fen { opacity: 0; transform: translate(100px, 150px) scale(.5); pointer-events: none; }
+
+/* Tableau de suivi */
+.board {
+  position: absolute; left: 0; top: 30px; width: 360px; height: 330px;
+  background: var(--fond); border-radius: 12px; padding: 14px 12px;
+  box-shadow: 0 14px 32px rgba(3, 8, 20, .4);
+  opacity: 0; transform: translateY(16px) scale(.97);
+  transition: opacity .5s ease .15s, transform .6s cubic-bezier(.2,.7,.2,1) .15s;
+}
+.demo:is([data-etape="2"], [data-etape="3"], [data-etape="4"]) .board { opacity: 1; transform: none; }
+.board__titre { margin: 0 0 12px 4px; font-size: 14px; font-weight: 600; color: var(--marine); letter-spacing: -0.01em; }
+.board__cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; height: 272px; }
+.board__col {
+  background: var(--panneau); border-radius: 8px; padding: 10px 6px;
+  display: flex; flex-direction: column; gap: 8px;
+  transition: background-color .4s ease;
+}
+.board__col > span { font-size: 11px; font-weight: 600; color: var(--marine-2); padding-left: 4px; }
+.ghost {
+  height: 44px; border-radius: 6px; background: #FFFFFF; border: 1px solid var(--trait-clair);
+  background-image: linear-gradient(var(--panneau), var(--panneau)), linear-gradient(var(--panneau), var(--panneau));
+  background-size: 60% 6px, 40% 6px; background-position: 8px 12px, 8px 24px; background-repeat: no-repeat;
+}
+.ghost--2 { margin-top: 60px; }
+.ghost--3 { margin-top: 0; }
+.board__col .ghost--2 ~ .ghost--3 { margin-top: 0; }
+.demo[data-col="2"] .board__col:nth-child(3) { background: #F3EBDA; }
+
+/* La fiche prospect qui avance */
+.prospect {
+  position: absolute; left: 18px; top: 74px; width: 100px; height: 52px;
+  background: #FFFFFF; border-radius: 6px; border: 1px solid var(--trait-clair); border-left: 3px solid var(--or);
+  box-shadow: 0 6px 14px rgba(20, 33, 61, .18);
+  padding: 7px 8px; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 4px 6px;
+  transition: transform .6s cubic-bezier(.2,.7,.2,1);
+}
+.prospect__pastille { width: 14px; height: 14px; border-radius: 50%; background: var(--panneau); border: 2px solid var(--or); }
+.prospect__nom { font-size: 11px; font-weight: 600; color: var(--marine); }
+.prospect b { grid-column: 1 / -1; height: 5px; border-radius: 3px; background: var(--panneau); }
+.prospect b.court { width: 60%; }
+.demo[data-col="1"] .prospect { transform: translateX(113px); }
+.demo[data-col="2"] .prospect { transform: translateX(226px); }
+
+/* Notifications */
+.toast {
+  position: absolute; left: 30px; width: 300px; margin: 0;
+  display: flex; align-items: center; gap: 10px;
+  background: #FFFFFF; color: var(--marine); border-radius: 10px; padding: 12px 14px;
+  font-size: 13px; font-weight: 600; box-shadow: 0 10px 24px rgba(3, 8, 20, .35);
+  opacity: 0; transform: translateY(10px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+.toast__ico { width: 18px; height: 18px; border-radius: 50%; background: var(--or); position: relative; flex: 0 0 auto; }
+.toast__ico::after {
+  content: ""; position: absolute; left: 6px; top: 3px; width: 4px; height: 8px;
+  border-right: 2px solid var(--profond); border-bottom: 2px solid var(--profond); transform: rotate(45deg);
+}
+.toast--relance { top: 384px; }
+.toast--rdv { top: 440px; }
+.demo[data-etape="2"]:is([data-col="1"], [data-col="2"]) .toast--relance { opacity: 1; transform: none; }
+.demo[data-col="2"]:is([data-etape="2"], [data-etape="3"], [data-etape="4"]) .toast--rdv { opacity: 1; transform: none; }
 
 /* Repliés */
 details { border: 1px solid var(--trait-clair); border-radius: var(--radius); background: var(--fond); }
