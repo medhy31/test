@@ -62,8 +62,8 @@ function construireFil() {
   const hub = nouveau("circle", { cx: HUB[0], cy: HUB[1], r: 7, fill: ACCENT }, sys);
   const noeuds = POS.repos.map(() => {
     const g = nouveau("g", {}, sys);
-    nouveau("rect", { x: -23, y: -15, width: 46, height: 30, rx: 6, fill: "#2A3A5C", stroke: "rgba(237,242,249,.45)", "stroke-width": 1.25 }, g);
-    nouveau("path", { d: "M-14 -4h20M-14 4h28", stroke: "rgba(237,242,249,.5)", "stroke-width": 2, "stroke-linecap": "round" }, g);
+    nouveau("rect", { x: -29, y: -19, width: 58, height: 38, rx: 7, fill: "#2A3A5C", stroke: "rgba(237,242,249,.45)", "stroke-width": 1.25 }, g);
+    nouveau("path", { d: "M-18 -5h24M-18 5h36", stroke: "rgba(237,242,249,.5)", "stroke-width": 2, "stroke-linecap": "round" }, g);
     return g;
   });
 
@@ -94,7 +94,7 @@ function construireFil() {
     });
     hub.style.opacity = clamp(trace * 1.5 - 0.5);
 
-    const oy = 300 + 175 * s + dy;
+    const oy = 300 + 179 * s + dy;
     branches.forEach((b, k) => {
       const p = clamp(v[I.branche] * 1.6 - k * 0.3);
       b.chemin.setAttribute("d", `M200 ${oy}C200 ${oy + 80} ${b.x} ${Y_BRANCHE - 90} ${b.x} ${Y_BRANCHE}`);

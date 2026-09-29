@@ -177,3 +177,11 @@ details > :not(summary) { margin: 0; padding: 0 16px 16px; }
 @media (min-width: 768px) {
   .footer__inner { flex-direction: row; justify-content: space-between; align-items: center; }
 }
+
+/* Bloc 1 : Hero */
+.hero { padding-top: 56px; }
+.hero .lead { margin-bottom: 2rem; max-width: 36em; }
+@media (min-width: 1024px) {
+  .hero { padding-top: 96px; min-height: calc(100vh - var(--header-h)); display: flex; align-items: center; }
+  .hero > .wrap { width: 100%; }
+}
