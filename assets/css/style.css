@@ -143,7 +143,7 @@ a { color: inherit; }
 .fil-etape svg { width: 100%; max-width: 360px; max-height: 340px; margin: 0 auto; }
 
 /* Textes du fil */
-.f-label { font-family: var(--corps); font-size: 13px; font-weight: 500; fill: var(--sur-sombre); }
+.f-label { font-family: var(--corps); font-size: 16px; font-weight: 500; fill: var(--sur-sombre); }
 
 /* Repliés */
 details { border: 1px solid var(--trait-clair); border-radius: var(--radius); background: var(--fond); }
@@ -206,3 +206,20 @@ details .liste { margin: 0; padding: 0 16px 16px; }
 
 /* Bloc 4 : Le diagnostic */
 #reserver .chute { margin-bottom: 1.75rem; }
+
+/* Bloc 5 : Les packs (empilés, pas de grille de cartes identiques) */
+.packs { margin-top: 40px; display: grid; gap: 0; border-top: 2px solid var(--marine); }
+.pack { padding: 28px 0 32px; border-bottom: 1px solid var(--trait-clair); }
+.pack__tete {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 4px 24px; margin-bottom: .75rem;
+}
+.pack h3 { margin: 0; }
+.pack__prix {
+  margin: 0; font-weight: 700; font-size: 1.0625rem; color: var(--marine);
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.pack details { margin-top: 4px; background: var(--fond); }
+.pack details p { font-size: .9688rem; }
+.transparence { margin-top: 32px; color: var(--marine-2); }
+.transparence p:last-child { font-weight: 700; color: var(--marine); margin-bottom: 0; }

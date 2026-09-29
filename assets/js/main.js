@@ -25,9 +25,9 @@ const HUB = [200, 300];
 /* Anneau puis rayons vers le centre (6 = centre) */
 const PAIRES = [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 0], [0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6]];
 const BRANCHES = [
-  { x: 80, label: "Présence en ligne" },
-  { x: 200, label: "Pilotage commercial" },
-  { x: 320, label: "Écosystème" },
+  { x: 75, label: ["Présence", "en ligne"] },
+  { x: 200, label: ["Pilotage", "commercial"] },
+  { x: 325, label: ["Écosystème"] },
 ];
 const Y_BRANCHE = 430;
 const PY_DEFAUT = 540;
@@ -70,8 +70,11 @@ function construireFil() {
   const branches = BRANCHES.map((b) => {
     const chemin = nouveau("path", trait, svg);
     const point = nouveau("circle", { cx: b.x, cy: Y_BRANCHE, r: 6, fill: "#14213D", stroke: ACCENT, "stroke-width": 1.5 }, svg);
-    const texte = nouveau("text", { x: b.x, y: Y_BRANCHE + 32, "text-anchor": "middle", class: "f-label" }, svg);
-    texte.textContent = b.label;
+    const texte = nouveau("text", { x: b.x, y: Y_BRANCHE + 34, "text-anchor": "middle", class: "f-label" }, svg);
+    b.label.forEach((ligne, k) => {
+      const t = nouveau("tspan", { x: b.x, dy: k ? 19 : 0 }, texte);
+      t.textContent = ligne;
+    });
     return { chemin, point, texte, x: b.x };
   });
 
