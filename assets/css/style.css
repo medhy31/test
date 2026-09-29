@@ -194,3 +194,15 @@ details > :not(summary) { margin: 0; padding: 0 16px 16px; }
   line-height: 1.3; letter-spacing: -0.01em; color: var(--marine);
 }
 .chute { font-weight: 500; color: var(--marine-2); }
+
+/* Listes */
+.liste { list-style: none; margin: 0 0 1.25rem; padding: 0; display: grid; gap: 8px; }
+.liste li { position: relative; padding-left: 24px; }
+.liste li::before {
+  content: ""; position: absolute; left: 2px; top: .62em;
+  width: 8px; height: 8px; border-radius: 50%; background: var(--marine-2);
+}
+details .liste { margin: 0; padding: 0 16px 16px; }
+
+/* Bloc 4 : Le diagnostic */
+#reserver .chute { margin-bottom: 1.75rem; }
