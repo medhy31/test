@@ -359,3 +359,18 @@ details .liste { margin: 0; padding: 0 16px 16px; }
 .js .mq:not(.visible) .pa-contacts { transform: translate(-10px, 12px) rotate(1.8deg); }
 .js .mq:not(.visible) .pa-msgs     { transform: translate(12px, 10px) rotate(-2.2deg); }
 .pa-agenda { transition-delay: .08s; } .pa-contacts { transition-delay: .16s; } .pa-msgs { transition-delay: .24s; }
+
+/* ---- Bloc 4 : le rapport d'état des lieux ---- */
+.rapport { padding: 18px 20px 20px; background: #FFFFFF; }
+.rapport__tete { padding-bottom: 12px; border-bottom: 1px solid #E3E8F0; }
+.rapport__titre { font-size: 15px; font-weight: 600; color: #14213D; }
+.rapport__sous { font-size: 11px; color: #6B7688; margin-top: 2px !important; }
+.rapport__liste li { display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid #F0F3F7; }
+.rapport__liste p { flex: 1; min-width: 0; }
+.rapport__liste b { display: block; font-size: 12.5px; font-weight: 600; }
+.rapport__liste em { display: block; font-style: normal; font-size: 11px; color: #6B7688; }
+.badge-diag { font-size: 10.5px; font-weight: 600; border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+.badge-diag.solide { background: rgba(108, 142, 255, .15); color: #3F5FD6; border: 1px solid transparent; }
+.badge-diag.construire { color: #2A3A5C; border: 1px solid #B9C4D6; }
+.rapport__suite { margin-top: 14px !important; font-size: 11.5px; color: #2A3A5C; background: #EDF2F9; border-radius: 8px; padding: 9px 12px; }
+.rapport__suite b { margin-right: 6px; color: #14213D; }
