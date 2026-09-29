@@ -34,39 +34,53 @@
       <div class="demo" data-etape="0" data-col="0">
         <div class="demo__cadre">
           <div class="demo__scene">
-            <div class="fen fen--form">
-              <div class="fen__barre"><i></i><i></i><i></i><span>Formulaire</span></div>
-              <div class="fen__corps"><b class="champ"></b><b class="champ"></b><b class="champ champ--court"></b><b class="envoyer"></b></div>
+            <div class="fen fen--mail">
+              <div class="fen__barre"><i></i><i></i><i></i><span>Boîte mail</span></div>
+              <ul class="mails">
+                <li class="non-lu"><b>Demande d'information</b><em>Bonjour, je voudrais savoir si…</em></li>
+                <li><b>Re : disponibilités</b><em>Merci pour votre retour…</em></li>
+                <li><b>Question sur l'offre</b><em>Est-ce que l'accompagnement…</em></li>
+              </ul>
+              <span class="badge">Sans réponse</span>
             </div>
             <div class="fen fen--agenda">
               <div class="fen__barre"><i></i><i></i><i></i><span>Agenda</span></div>
-              <div class="fen__corps grille"><b></b><b></b><b></b><b></b><b></b><b></b><b class="plein"></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
+              <div class="semaine"><span>Lun</span><span>Mar</span><span>Mer</span><span>Jeu</span><span>Ven</span>
+                <b style="grid-column:1;grid-row:2"></b><b style="grid-column:3;grid-row:3"></b><b class="or" style="grid-column:4;grid-row:2"></b><b style="grid-column:2;grid-row:4"></b><b style="grid-column:5;grid-row:3"></b></div>
             </div>
             <div class="fen fen--tableur">
               <div class="fen__barre"><i></i><i></i><i></i><span>Tableur</span></div>
-              <div class="fen__corps tableur"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
+              <div class="tableur"><span>Contact</span><span>Source</span><span>Statut</span><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
             </div>
-            <div class="fen fen--mail">
-              <div class="fen__barre"><i></i><i></i><i></i><span>Boîte mail</span></div>
-              <div class="fen__corps"><b class="ligne"></b><b class="ligne"></b><b class="ligne ligne--court"></b></div>
-              <span class="badge">Message sans réponse</span>
+            <div class="fen fen--form">
+              <div class="fen__barre"><i></i><i></i><i></i><span>Formulaire du site</span></div>
+              <div class="formulaire"><label>Nom</label><b></b><label>Email</label><b></b><label>Message</label><b class="haut"></b></div>
             </div>
 
-            <div class="board">
-              <p class="board__titre">Suivi des prospects</p>
-              <div class="board__cols">
-                <div class="board__col"><span>Nouveau</span><b class="ghost ghost--2"></b><b class="ghost ghost--3"></b></div>
-                <div class="board__col"><span>Relancé</span><b class="ghost ghost--2"></b></div>
-                <div class="board__col"><span>Réservé</span><b class="ghost ghost--2"></b></div>
+            <div class="app">
+              <div class="app__barre"><i></i><i></i><i></i><span>Suivi des prospects</span></div>
+              <div class="app__corps">
+                <nav class="app__nav"><svg class="ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5 8 4l5 4.5V13H3z"/></svg><svg class="ic actif" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="6" r="2.5"/><path d="M3.5 13c.7-2.3 2.4-3.3 4.5-3.3s3.8 1 4.5 3.3"/></svg><svg class="ic" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="3.5" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3"/></svg><svg class="ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 4.5h11v7h-6l-3 2v-2h-2z"/></svg></nav>
+                <div class="app__main">
+                  <p class="app__titre">Pipeline</p>
+                  <div class="cols">
+                    <div class="colonne"><p class="colonne__titre"><i></i>Nouveau</p>
+                      <div class="carte"><b>Appel manqué</b><em>SMS envoyé</em></div>
+                      <div class="carte"><b>Demande d'information</b><em>Formulaire du site</em></div></div>
+                    <div class="colonne"><p class="colonne__titre"><i></i>Relancé</p>
+                      <div class="carte"><b>Devis envoyé</b><em>Relance programmée</em></div></div>
+                    <div class="colonne"><p class="colonne__titre"><i class="or"></i>Réservé</p>
+                      <div class="carte"><b>Séance découverte</b><em>Rappel envoyé</em></div></div>
+                  </div>
+                  <div class="carte carte--active"><b>Demande de rendez-vous</b><em>Formulaire du site</em></div>
+                </div>
               </div>
-              <div class="prospect"><span class="prospect__pastille"></span><span class="prospect__nom">Prospect</span><b></b><b class="court"></b></div>
+              <p class="notif notif--relance"><span class="notif__ico"></span>Relance envoyée automatiquement</p>
+              <p class="notif notif--rdv"><span class="notif__ico"></span>Rendez-vous confirmé</p>
             </div>
-
-            <p class="toast toast--relance"><span class="toast__ico"></span>Relance envoyée</p>
-            <p class="toast toast--rdv"><span class="toast__ico"></span>Rendez-vous confirmé</p>
+            <p class="demo__legende">Exemple illustratif</p>
           </div>
         </div>
-        <p class="demo__legende">Exemple illustratif</p>
       </div>
     </template>
 

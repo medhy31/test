@@ -14,16 +14,16 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
    ------------------------------------------------------------------ */
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const tpl = document.getElementById("demo-tpl");
-const SCENE_W = 360, SCENE_H = 520;
+const SCENE_W = 380, SCENE_H = 440;
 
 function creerDemo(hote) {
   const demo = tpl.content.firstElementChild.cloneNode(true);
   hote.appendChild(demo);
   const cadre = demo.querySelector(".demo__cadre");
   const ajuster = () => {
-    const w = hote.clientWidth - parseFloat(getComputedStyle(hote).paddingLeft) * 2;
-    const hMax = hote.dataset.hauteur ? hote.clientHeight - 80 : Infinity;
-    const k = Math.min(w / SCENE_W, hMax / SCENE_H, 1.25);
+    const w = hote.clientWidth;
+    const hMax = hote.dataset.hauteur ? hote.clientHeight : Infinity;
+    const k = Math.min(w / SCENE_W, hMax / SCENE_H, 1);
     cadre.style.setProperty("--k", k);
     cadre.style.width = SCENE_W * k + "px";
     cadre.style.height = SCENE_H * k + "px";
