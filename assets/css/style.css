@@ -163,12 +163,13 @@ a { color: inherit; }
 
 /* Outils éparpillés */
 .fen {
-  position: absolute; left: 0; top: 0; width: 184px; height: 124px;
+  position: absolute; left: 0; top: 0; width: 184px; height: 138px;
   background: #FFFFFF; border-radius: 8px; box-shadow: var(--ombre);
   transition: transform .7s cubic-bezier(.2,.7,.2,1), opacity .45s ease;
 }
-.mails { list-style: none; padding: 4px 0; }
+.mails { list-style: none; padding: 4px 0; overflow: hidden; height: 108px; }
 .mails li { padding: 4px 10px; border-bottom: 1px solid #F0F3F7; }
+.mails li:last-child { border-bottom: 0; }
 .mails b { font-size: 10.5px; font-weight: 500; color: var(--texte); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .mails em { font-size: 9.5px; color: #6B7688; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .mails .non-lu b { font-weight: 700; }
