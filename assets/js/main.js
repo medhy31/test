@@ -163,7 +163,7 @@ document.querySelectorAll(".fil-etape[data-etape]").forEach((fig) => {
     const t = ETAPES[n].slice();
     if (sec.dataset.trace === "defilement") {
       const r = sec.getBoundingClientRect();
-      t[I.trace] = clamp((vh * 0.6 - r.top) / (r.height * 0.7));
+      t[I.trace] = clamp((vh * 0.5 - r.top) / (vh * 0.5 - 72 + r.height * 0.35));
     }
     if (n === 4 && bouton) {
       const r = bouton.getBoundingClientRect();
