@@ -7,14 +7,14 @@
   --fond: #F7F8FA;
   --panneau: #EDF2F9;
   --texte: #12151C;
-  --accent: #6C8EFF;
-  --accent-hover: #5A7DF5;
+  --or: #C8A45C;
+  --or-hover: #D6B571;
   --sur-sombre: #F7F8FA;
   --sur-sombre-2: #C9D3E6;
   --trait-clair: #D5DDEA;
   --radius: 10px;
-  --titre: "Fraunces", Georgia, "Times New Roman", serif;
-  --corps: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --titre: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --corps: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
   --header-h: 72px;
   --fil-w: 0px;
 }
@@ -42,8 +42,8 @@ img, svg { display: block; max-width: 100%; height: auto; }
 h1, h2, h3 {
   font-family: var(--titre);
   font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.12;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
   margin: 0 0 .6em;
   text-wrap: balance;
   color: var(--marine);
@@ -54,30 +54,31 @@ h3 { font-size: 1.5rem; }
 p { margin: 0 0 1em; }
 
 a { color: inherit; }
-:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+:focus-visible { outline: 3px solid var(--marine); outline-offset: 3px; border-radius: 4px; }
+.topbar :focus-visible, .section--sombre :focus-visible, .footer :focus-visible { outline-color: var(--or); }
 
 .wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 16px; }
 @media (min-width: 768px) { .wrap { padding: 0 32px; } }
 
 .skip {
   position: absolute; left: 16px; top: -48px; z-index: 100;
-  background: var(--accent); color: #FFFFFF; padding: 8px 14px; border-radius: 6px;
+  background: var(--or); color: var(--profond); padding: 8px 14px; border-radius: 6px;
 }
 .skip:focus { top: 8px; }
 
-/* Bouton principal (unique). Texte blanc en 19 px gras : « grand texte » au sens AA (3:1). */
+/* Bouton principal (unique) : l'or du logo, texte marine profond (contraste environ 8:1). */
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
   min-height: 52px; padding: 12px 24px;
-  background: var(--accent); color: #FFFFFF;
-  font-family: var(--corps); font-weight: 700; font-size: 1.1875rem; line-height: 1.2;
+  background: var(--or); color: var(--profond);
+  font-family: var(--corps); font-weight: 600; font-size: 1.0625rem; line-height: 1.2; letter-spacing: -0.01em;
   text-align: center; text-decoration: none;
   border-radius: var(--radius);
   transition: background-color .2s ease, transform .2s ease;
 }
-.btn:hover { background: var(--accent-hover); }
+.btn:hover { background: var(--or-hover); }
 .btn:active { transform: translateY(1px); }
-.btn--sm { min-height: 44px; padding: 6px 12px; }
+.btn--sm { min-height: 44px; padding: 6px 12px; font-size: .9375rem; }
 @media (min-width: 640px) { .btn--sm { padding: 8px 18px; } }
 
 .micro { margin-top: .75rem; font-size: .9375rem; }
