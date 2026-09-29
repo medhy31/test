@@ -374,3 +374,71 @@ details .liste { margin: 0; padding: 0 16px 16px; }
 .badge-diag.construire { color: #2A3A5C; border: 1px solid #B9C4D6; }
 .rapport__suite { margin-top: 14px !important; font-size: 11.5px; color: #2A3A5C; background: #EDF2F9; border-radius: 8px; padding: 9px 12px; }
 .rapport__suite b { margin-right: 6px; color: #14213D; }
+
+/* ---- Bloc 5 : une petite maquette par pack ---- */
+.packs-section .col { max-width: none; }
+.packs-section .col > h2, .packs-section .col > p, .transparence { max-width: 640px; }
+.pack { display: grid; gap: 24px; }
+.pack .mq { max-width: 440px; }
+@media (min-width: 1024px) {
+  .pack { grid-template-columns: minmax(0, 1fr) 380px; gap: 56px; align-items: center; }
+}
+.pk-cadre { position: relative; padding: 0 0 34px; }
+.pk-cadre > .fenetre { transform: perspective(1400px) rotateY(-3deg); }
+.site--grand .site__hero { padding: 26px 6px 30px; }
+.site--grand .site__h { font-size: 18px; }
+.site__btn--actif { background: #6C8EFF; }
+.mini-cal {
+  position: absolute; right: -6px; bottom: 0; width: 200px;
+  background: #FFFFFF; border-radius: 10px; padding: 10px 12px 12px;
+  box-shadow: 0 1px 2px rgba(12, 20, 38, .08), 0 18px 36px -14px rgba(12, 20, 38, .4);
+  font-family: "IBM Plex Sans", system-ui, sans-serif; color: #12151C;
+}
+.mini-cal__mois { margin: 0 0 6px; font-size: 11.5px; font-weight: 600; color: #14213D; }
+.mini-cal__grille { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; font-size: 9.5px; }
+.mini-cal__grille span { color: #8A95A8; font-weight: 600; }
+.mini-cal__grille b { font-weight: 400; color: #2A3A5C; line-height: 18px; border-radius: 4px; }
+.mini-cal__grille b.off { color: #C0C8D6; }
+.mini-cal__grille b.sel { background: #6C8EFF; color: #FFFFFF; font-weight: 600; }
+.mini-cal__ok { display: flex; align-items: center; gap: 6px; margin: 8px 0 0; font-size: 10.5px; font-weight: 600; color: #2E6A4B; }
+.mini-cal__ok i { width: 7px; height: 7px; border-radius: 50%; background: #3E9A6B; }
+
+.pk-pipe { padding: 12px; background: #F7F8FA; }
+.pk-pipe .carte__sous { font-size: 10.5px; }
+.toast-mq {
+  position: absolute; right: -6px; bottom: 0; margin: 0; width: 230px;
+  display: flex; gap: 9px; align-items: center;
+  background: #14213D; color: #F7F8FA; border-radius: 10px; padding: 10px 12px;
+  box-shadow: 0 18px 36px -14px rgba(12, 20, 38, .55);
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+}
+.toast-mq__ico { width: 28px; height: 28px; border-radius: 8px; background: rgba(108, 142, 255, .25); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+.toast-mq__ico svg { width: 16px; height: 16px; fill: none; stroke: #FFFFFF; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.toast-mq b { display: block; font-size: 11px; font-weight: 600; }
+.toast-mq em { display: block; font-style: normal; font-size: 10px; color: #B9C4DA; }
+
+.commu { padding: 12px 14px 14px; background: #F7F8FA; }
+.commu__titre { font-size: 12px; font-weight: 600; color: #14213D; margin-bottom: 8px !important; }
+.commu__titre--2 { margin-top: 12px !important; }
+.post { display: flex; gap: 8px; background: #FFFFFF; border: 1px solid #E3E8F0; border-radius: 8px; padding: 8px 10px; margin-bottom: 6px; }
+.post__tete { display: flex; gap: 6px; align-items: baseline; }
+.post__tete b { font-size: 11.5px; font-weight: 600; }
+.post__tete em { font-style: normal; font-size: 10px; color: #8A95A8; }
+.post__txt { font-size: 10.5px; color: #3B475E; }
+.biblio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.cours { background: #FFFFFF; border: 1px solid #E3E8F0; border-radius: 8px; padding: 6px 6px 8px; }
+.cours__vignette { height: 44px; border-radius: 5px; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
+.cours__vignette svg { width: 20px; height: 20px; fill: none; stroke: #FFFFFF; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.v0 { background: #14213D; } .v1 { background: #2A3A5C; } .v2 { background: #6C8EFF; }
+.cours__num { font-size: 9.5px; color: #8A95A8; }
+.cours__titre { font-size: 10.5px; font-weight: 600; line-height: 1.25; min-height: 26px; }
+.cours__barre { display: block; height: 4px; border-radius: 2px; background: #EDF2F9; margin-top: 4px; overflow: hidden; }
+.cours__barre i { display: block; height: 100%; background: #6C8EFF; }
+.site--grand .site__hero { padding: 22px 6px 64px; max-width: 62%; }
+.site--grand .site__h { font-size: 16px; }
+.pk-cadre--site { padding-bottom: 20px; }
+.pk-cadre--site .mini-cal { bottom: 0; width: 186px; }
+@media (max-width: 1023px) {
+  .pack .mq__echelle { width: 100%; }
+  .pack .pk-cadre { margin-right: 6px; }
+}
