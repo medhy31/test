@@ -34,17 +34,17 @@ const PY_DEFAUT = 540;
 
 /* Vecteur d'état : 18 valeurs de nœuds, puis trace, échelle, décalage,
    branches, libellés, convergence, hauteur du point, ligne vers le bouton. */
-const I = { trace: 18, s: 19, dy: 20, branche: 21, labels: 22, conv: 23, py: 24, hl: 25 };
-const etape = (pos, o) => [...pos.flat(), o.trace, o.s, o.dy, o.branche, o.labels, o.conv, PY_DEFAUT, o.hl ?? 0];
+const I = { trace: 18, s: 19, dy: 20, branche: 21, labels: 22, conv: 23, py: 24, hl: 25, yb: 26 };
+const etape = (pos, o) => [...pos.flat(), o.trace, o.s, o.dy, o.branche, o.labels, o.conv, o.py ?? PY_DEFAUT, o.hl ?? 0, o.yb ?? Y_BRANCHE];
 const ETAPES = [
   etape(POS.repos,     { trace: 0, s: 1, dy: 0, branche: 0, labels: 0, conv: 0 }),
   etape(POS.disperses, { trace: 0, s: 1, dy: 0, branche: 0, labels: 0, conv: 0 }),
   etape(POS.systeme,   { trace: 1, s: 1, dy: 0, branche: 0, labels: 0, conv: 0 }),
   etape(POS.systeme,   { trace: 1, s: .5, dy: -150, branche: 1, labels: 1, conv: 0 }),
-  etape(POS.systeme,   { trace: 1, s: .5, dy: -150, branche: 1, labels: 0, conv: 1, hl: 1 }),
+  etape(POS.systeme,   { trace: 1, s: .38, dy: -225, branche: 1, labels: 0, conv: 1, hl: 1, yb: 210, py: 330 }),
 ];
 /* Cadrage de chaque étape affichée seule (mobile) */
-const CADRAGES = ["0 180 400 240", "0 50 400 510", "0 110 400 400", "0 40 400 450", "0 40 400 560"];
+const CADRAGES = ["0 180 400 240", "0 50 400 510", "0 110 400 400", "0 40 400 450", "0 0 400 360"];
 
 function nouveau(nom, attrs, parent) {
   const e = document.createElementNS(NS, nom);
@@ -83,7 +83,7 @@ function construireFil() {
   const cible = nouveau("circle", { cx: 200, cy: PY_DEFAUT, r: 8, fill: ACCENT }, svg);
 
   function rendre(v) {
-    const s = v[I.s], dy = v[I.dy], trace = v[I.trace], py = v[I.py];
+    const s = v[I.s], dy = v[I.dy], trace = v[I.trace], py = v[I.py], yb = v[I.yb];
     sys.setAttribute("transform", `translate(0 ${dy}) translate(200 300) scale(${s}) translate(-200 -300)`);
     const pt = (k) => (k === 6 ? HUB : [v[k * 3], v[k * 3 + 1]]);
     noeuds.forEach((g, k) => g.setAttribute("transform", `translate(${v[k * 3]} ${v[k * 3 + 1]}) rotate(${v[k * 3 + 2]})`));
@@ -100,7 +100,10 @@ function construireFil() {
     const oy = 300 + 179 * s + dy;
     branches.forEach((b, k) => {
       const p = clamp(v[I.branche] * 1.6 - k * 0.3);
-      b.chemin.setAttribute("d", `M200 ${oy}C200 ${oy + 80} ${b.x} ${Y_BRANCHE - 90} ${b.x} ${Y_BRANCHE}`);
+      const m = (yb - oy) * 0.45;
+      b.chemin.setAttribute("d", `M200 ${oy}C200 ${oy + m} ${b.x} ${yb - m} ${b.x} ${yb}`);
+      b.point.setAttribute("cy", yb);
+      b.texte.setAttribute("y", yb + 34);
       b.chemin.style.strokeDashoffset = 1 - p;
       b.chemin.style.opacity = p > 0.001 ? 1 : 0;
       const fin = clamp((p - 0.8) * 5);
@@ -110,7 +113,7 @@ function construireFil() {
 
     const c = v[I.conv];
     convergences.forEach((l, k) => {
-      const x = BRANCHES[k].x, y0 = Y_BRANCHE + 7, h = py - y0;
+      const x = BRANCHES[k].x, y0 = yb + 7, h = py - y0;
       const p = clamp(c * 1.6 - k * 0.3);
       l.setAttribute("d", `M${x} ${y0}C${x} ${y0 + h * 0.6} 200 ${py - h * 0.6} 200 ${py}`);
       l.style.strokeDashoffset = 1 - p;
@@ -173,7 +176,7 @@ document.querySelectorAll(".fil-etape[data-etape]").forEach((fig) => {
       const m = f.svg.getScreenCTM();
       if (m) {
         const p = new DOMPoint(0, r.top + r.height / 2).matrixTransform(m.inverse());
-        t[I.py] = clamp(p.y, 480, 585);
+        t[I.py] = clamp(p.y, t[I.yb] + 40, 585);
       }
     }
     return t;

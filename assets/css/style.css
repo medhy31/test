@@ -223,3 +223,13 @@ details .liste { margin: 0; padding: 0 16px 16px; }
 .pack details p { font-size: .9688rem; }
 .transparence { margin-top: 32px; color: var(--marine-2); }
 .transparence p:last-child { font-weight: 700; color: var(--marine); margin-bottom: 0; }
+
+/* Bloc 6 : Appel final */
+.final .fil-etape { margin: 8px 0 24px; }
+.portrait { margin: 48px 0 0; width: 100%; max-width: 240px; }
+.portrait__vide, .portrait img {
+  width: 100%; aspect-ratio: 1 / 1; border-radius: 14px;
+  background: var(--marine-2); object-fit: cover;
+}
+.portrait figcaption { margin-top: 10px; font-size: .9375rem; color: var(--sur-sombre-2); }
+.faq__titre { font-size: 1.5rem; margin-top: 56px; }
