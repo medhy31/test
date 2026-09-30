@@ -126,7 +126,7 @@ a { color: inherit; }
 .fenetre {
   background: #FFFFFF; border-radius: 12px; overflow: hidden;
   box-shadow: 0 1px 2px rgba(12, 20, 38, .06), 0 24px 48px -16px rgba(12, 20, 38, .32);
-  font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 12px; line-height: 1.4; color: #12151C;
+  font-family: var(--corps); font-size: 12px; line-height: 1.4; color: #12151C;
 }
 .incline { transform: perspective(1600px) rotateY(-4deg) rotateX(2deg); }
 .fenetre :where(p, ul, ol, h4) { margin: 0; padding: 0; list-style: none; }
@@ -242,7 +242,7 @@ details .liste { margin: 0; padding: 0 16px 16px; }
   display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 14px 0;
 }
 .app__nav .ic { width: 34px; height: 34px; padding: 8px; border-radius: 8px; }
-.app__nav .ic.actif { stroke: #FFFFFF; background: rgba(108, 142, 255, .28); }
+.app__nav .ic.actif { stroke: #FFFFFF; background: rgba(200, 164, 92, .28); }
 .app__nav .ic.bas { margin-top: auto; }
 .app__main { flex: 1; min-width: 0; padding: 16px 18px 18px; }
 .app__tete { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
@@ -255,7 +255,7 @@ details .liste { margin: 0; padding: 0 16px 16px; }
 .kpi__label { font-size: 11px; color: #6B7688; }
 .kpi__val { font-size: 22px; font-weight: 600; color: #12151C; line-height: 1.2; margin-top: 2px !important; }
 .kpi__delta { font-size: 10.5px; color: #3E7A57; }
-.kpi--attention .kpi__delta { color: #4E6FE0; }
+.kpi--attention .kpi__delta { color: #8A6A2A; }
 
 .pipe { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .pipe__col { background: #EDF2F9; border-radius: 8px; padding: 8px; display: flex; flex-direction: column; gap: 6px; }
@@ -267,8 +267,8 @@ details .liste { margin: 0; padding: 0 16px 16px; }
 .carte__nom { font-size: 12px; font-weight: 600; }
 .carte__sous { font-size: 11px; color: #3B475E; margin-top: 4px !important; }
 .carte__meta { font-size: 10.5px; color: #6B7688; margin-top: 2px !important; }
-.carte--active { border-color: #6C8EFF; box-shadow: 0 0 0 1px #6C8EFF, 0 6px 14px -6px rgba(108, 142, 255, .6); }
-.carte--active .carte__meta { color: #4E6FE0; font-weight: 500; }
+.carte--active { border-color: #C8A45C; box-shadow: 0 0 0 1px #C8A45C, 0 6px 14px -6px rgba(200, 164, 92, .55); }
+.carte--active .carte__meta { color: #8A6A2A; font-weight: 500; }
 .avatar {
   width: 22px; height: 22px; border-radius: 50%; flex: 0 0 auto;
   display: inline-flex; align-items: center; justify-content: center;
@@ -323,7 +323,7 @@ details .liste { margin: 0; padding: 0 16px 16px; }
 .inbox__tete { display: flex; justify-content: space-between; align-items: center; padding: 2px 12px 6px; font-size: 11px; font-weight: 600; color: #14213D; }
 .inbox__tete span { font-size: 10px; font-weight: 600; color: #FFFFFF; background: #D2555A; border-radius: 999px; padding: 1px 7px; }
 .inbox__l { display: grid; grid-template-columns: 6px 62px minmax(0, 1fr) 26px; align-items: center; gap: 6px; padding: 7px 12px; border-top: 1px solid #F0F3F7; font-size: 10.5px; }
-.inbox__l i { width: 6px; height: 6px; border-radius: 50%; background: #6C8EFF; }
+.inbox__l i { width: 6px; height: 6px; border-radius: 50%; background: #C8A45C; }
 .inbox__l b { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .inbox__l span { font-weight: 600; color: #12151C; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .inbox__l em { font-style: normal; font-size: 9.5px; color: #6B7688; text-align: right; }
@@ -332,12 +332,12 @@ details .liste { margin: 0; padding: 0 16px 16px; }
 .reunis { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .panneau { background: #FFFFFF; border: 1px solid #E3E8F0; border-radius: 8px; padding: 10px 12px 12px; }
 .panneau__titre { display: flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; color: #14213D; margin-bottom: 8px !important; }
-.panneau__titre .ic { width: 15px; height: 15px; stroke: #6C8EFF; }
+.panneau__titre .ic { width: 15px; height: 15px; stroke: #C8A45C; }
 .panneau em { display: block; font-style: normal; font-size: 10.5px; color: #6B7688; }
 .panneau b { font-weight: 600; }
 .evt { display: flex; gap: 8px; padding: 6px 0; border-top: 1px solid #F0F3F7; font-size: 11px; }
 .evt:first-of-type { border-top: 0; padding-top: 0; }
-.point { width: 7px; height: 7px; border-radius: 50%; background: #6C8EFF; margin-top: 5px; flex: 0 0 auto; }
+.point { width: 7px; height: 7px; border-radius: 50%; background: #C8A45C; margin-top: 5px; flex: 0 0 auto; }
 .rdv li { display: flex; gap: 10px; align-items: center; padding: 6px 0; border-top: 1px solid #F0F3F7; font-size: 11px; }
 .rdv li:first-child { border-top: 0; padding-top: 0; }
 .rdv__date { width: 34px; text-align: center; font-size: 9.5px; color: #6B7688; background: #EDF2F9; border-radius: 6px; padding: 3px 0; line-height: 1.1; }
@@ -347,7 +347,7 @@ details .liste { margin: 0; padding: 0 16px 16px; }
 .lignes li > b { flex: 1; }
 .pastille { font-size: 10px; font-weight: 500; border-radius: 999px; padding: 1px 8px; white-space: nowrap; }
 .p-neutre { background: #EDF2F9; color: #2A3A5C; }
-.p-actif { background: rgba(108, 142, 255, .15); color: #3F5FD6; }
+.p-actif { background: #F4ECDC; color: #7A5C22; }
 .p-ok { background: #DCEFE6; color: #2E6A4B; }
 .canal { font-size: 9.5px; font-weight: 600; color: #2A3A5C; background: #EDF2F9; border-radius: 4px; padding: 1px 6px; width: 38px; text-align: center; }
 .lignes li p { flex: 1; min-width: 0; }
@@ -370,7 +370,7 @@ details .liste { margin: 0; padding: 0 16px 16px; }
 .rapport__liste b { display: block; font-size: 12.5px; font-weight: 600; }
 .rapport__liste em { display: block; font-style: normal; font-size: 11px; color: #6B7688; }
 .badge-diag { font-size: 10.5px; font-weight: 600; border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
-.badge-diag.solide { background: rgba(108, 142, 255, .15); color: #3F5FD6; border: 1px solid transparent; }
+.badge-diag.solide { background: #F4ECDC; color: #7A5C22; border: 1px solid transparent; }
 .badge-diag.construire { color: #2A3A5C; border: 1px solid #B9C4D6; }
 .rapport__suite { margin-top: 14px !important; font-size: 11.5px; color: #2A3A5C; background: #EDF2F9; border-radius: 8px; padding: 9px 12px; }
 .rapport__suite b { margin-right: 6px; color: #14213D; }
@@ -387,19 +387,19 @@ details .liste { margin: 0; padding: 0 16px 16px; }
 .pk-cadre > .fenetre { transform: perspective(1400px) rotateY(-3deg); }
 .site--grand .site__hero { padding: 26px 6px 30px; }
 .site--grand .site__h { font-size: 18px; }
-.site__btn--actif { background: #6C8EFF; }
+.site__btn--actif { background: #C8A45C; color: #0B1220; }
 .mini-cal {
   position: absolute; right: -6px; bottom: 0; width: 200px;
   background: #FFFFFF; border-radius: 10px; padding: 10px 12px 12px;
   box-shadow: 0 1px 2px rgba(12, 20, 38, .08), 0 18px 36px -14px rgba(12, 20, 38, .4);
-  font-family: "IBM Plex Sans", system-ui, sans-serif; color: #12151C;
+  font-family: var(--corps); color: #12151C;
 }
 .mini-cal__mois { margin: 0 0 6px; font-size: 11.5px; font-weight: 600; color: #14213D; }
 .mini-cal__grille { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; font-size: 9.5px; }
 .mini-cal__grille span { color: #8A95A8; font-weight: 600; }
 .mini-cal__grille b { font-weight: 400; color: #2A3A5C; line-height: 18px; border-radius: 4px; }
 .mini-cal__grille b.off { color: #C0C8D6; }
-.mini-cal__grille b.sel { background: #6C8EFF; color: #FFFFFF; font-weight: 600; }
+.mini-cal__grille b.sel { background: #C8A45C; color: #0B1220; font-weight: 600; }
 .mini-cal__ok { display: flex; align-items: center; gap: 6px; margin: 8px 0 0; font-size: 10.5px; font-weight: 600; color: #2E6A4B; }
 .mini-cal__ok i { width: 7px; height: 7px; border-radius: 50%; background: #3E9A6B; }
 
@@ -410,9 +410,9 @@ details .liste { margin: 0; padding: 0 16px 16px; }
   display: flex; gap: 9px; align-items: center;
   background: #14213D; color: #F7F8FA; border-radius: 10px; padding: 10px 12px;
   box-shadow: 0 18px 36px -14px rgba(12, 20, 38, .55);
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-family: var(--corps);
 }
-.toast-mq__ico { width: 28px; height: 28px; border-radius: 8px; background: rgba(108, 142, 255, .25); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+.toast-mq__ico { width: 28px; height: 28px; border-radius: 8px; background: rgba(200, 164, 92, .3); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
 .toast-mq__ico svg { width: 16px; height: 16px; fill: none; stroke: #FFFFFF; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 .toast-mq b { display: block; font-size: 11px; font-weight: 600; }
 .toast-mq em { display: block; font-style: normal; font-size: 10px; color: #B9C4DA; }
@@ -429,11 +429,11 @@ details .liste { margin: 0; padding: 0 16px 16px; }
 .cours { background: #FFFFFF; border: 1px solid #E3E8F0; border-radius: 8px; padding: 6px 6px 8px; }
 .cours__vignette { height: 44px; border-radius: 5px; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
 .cours__vignette svg { width: 20px; height: 20px; fill: none; stroke: #FFFFFF; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-.v0 { background: #14213D; } .v1 { background: #2A3A5C; } .v2 { background: #6C8EFF; }
+.v0 { background: #14213D; } .v1 { background: #2A3A5C; } .v2 { background: #C8A45C; }
 .cours__num { font-size: 9.5px; color: #8A95A8; }
 .cours__titre { font-size: 10.5px; font-weight: 600; line-height: 1.25; min-height: 26px; }
 .cours__barre { display: block; height: 4px; border-radius: 2px; background: #EDF2F9; margin-top: 4px; overflow: hidden; }
-.cours__barre i { display: block; height: 100%; background: #6C8EFF; }
+.cours__barre i { display: block; height: 100%; background: #C8A45C; }
 .site--grand .site__hero { padding: 22px 6px 64px; max-width: 62%; }
 .site--grand .site__h { font-size: 16px; }
 .pk-cadre--site { padding-bottom: 20px; }
@@ -442,3 +442,4 @@ details .liste { margin: 0; padding: 0 16px 16px; }
   .pack .mq__echelle { width: 100%; }
   .pack .pk-cadre { margin-right: 6px; }
 }
+.v2 svg { stroke: #0B1220; }
